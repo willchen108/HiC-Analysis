@@ -6,7 +6,7 @@ from math import sqrt
 #readfile = open('~/data/GSE63525_GM12878_primary+replicate_HiCCUPS_looplist.txt')
 #SNPsfile = open('~/data/eqtl_capture_just_all_eqtls_all_promoter_snps_excluded_snp_coords_sorted_chr_removed.bed')
 readfile = open(sys.argv[1])
-NPsfile = open(sys.argv[2])
+SNPsfile = open(sys.argv[2])
 loops,SNPs = {},[]
 #read loops list
 for line in readfile:
