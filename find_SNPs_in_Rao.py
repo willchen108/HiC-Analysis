@@ -5,8 +5,8 @@ from collections import Counter
 from math import sqrt
 
 readfile = open(sys.argv[1])
-SNPsfile = open(sys.arge[2])
-distance = int(sys.arge[3])
+SNPsfile = open(sys.argv[2])
+distance = int(sys.argv[3])
 for line in readfile:
 	chr1,x1,x2,chr2,y1,y2 = line.split()[0:6] 
 	for line2 in SNPsfile:
