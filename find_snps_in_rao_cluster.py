@@ -3,10 +3,11 @@
 import os,sys,re
 from collections import Counter
 from math import sqrt
-readfile = open("/Users/Will/Downloads/GSE63525_GM12878_primary+replicate_HiCCUPS_looplist.txt")
-SNPsfile = open("/Users/Will/Desktop/eqtl_capture_just_all_eqtls_all_promoter_snps_excluded_snp_coords_sorted_chr_removed.bed.txt")
-targetfile = open("/Users/Will/Desktop/gencode.v19_promoter_chr_removed.bed")
+readfile = open("~/data/GSE63525_GM12878_primary+replicate_HiCCUPS_looplist.txt")
+SNPsfile = open("~/data/eqtl_capture_just_all_eqtls_all_promoter_snps_excluded_snp_coords_sorted_chr_removed.bed")
+
 loops,SNPs = {},[]
+#read loops list
 for line in readfile:
 	chr1,x1,x2,chr2,y1,y2 = line.split()[0:6] 
 	if chr1 != "chr1":
@@ -16,6 +17,7 @@ for line in readfile:
 			loops[chr1] = []
 			loops[chr1].append([int(x1),int(x2),int(y1),int(y2)])
 
+#read snps list and find the snps in loops.
 for line in SNPsfile:
 	chrid, snps = line.split()[0:2]	
 	try:
@@ -26,18 +28,7 @@ for line in SNPsfile:
 	for i in range(0,len(loops[chrid])):
 		x1,x2,y1,y2 = loops[chrid][i][0:4]
 		if snps in range(x1,x2):
-			SNPs.append([chrid, x1, x2, y1, y2, snps])
-			#print "%s\t%s\t%s\t%s\t%s\t%s" % (chrid, x1, x2, y1, y2, snps) 
+			print "%s\t%s\t%s\t%s\t%s\t%s" % (chrid, x1, x2, y1, y2, snps) 
 		elif snps in range(y1,y2):
-			#print "%s\t%s\t%s\t%s\t%s\t%s" % (chrid, y1, y2, x1, x2, snps) 
-			SNPs.append([chrid, y1, y2, x1, x2, snps])
+			print "%s\t%s\t%s\t%s\t%s\t%s" % (chrid, y1, y2, x1, x2, snps) 
 
-total =[]
-for line in targetfile:
-	ch,st,end = line.split()[0:3]
-	st = int(st)
-	end = int(end)
-	for snp in SNPs:
-		if snp[0] == ch:
-			if st in range(snp[3],snp[4]) or end in range(snp[3],snp[4]):
-				total.append([snp[0], snp[1], snp[2], snp[3], snp[4], snp[5],st, end])
