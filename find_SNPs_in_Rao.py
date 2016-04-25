@@ -27,7 +27,7 @@ for line in SNPsfile:
 		x1,x2,y1,y2 = loops[chrid][i][0:4]
 		if snps in range(x1,x2):
 			#targets.append([chr1, x1, x2, y1, y2, snps])
-			print "%s\t%s\t%s\t%s\t%s\t%s" % (chr1, x1, x2, y1, y2, snps) 
+			print "%s\t%s\t%s\t%s\t%s\t%s" % (chrid, x1, x2, y1, y2, snps) 
 		elif snps in range(y1,y2):
-			print "%s\t%s\t%s\t%s\t%s\t%s" % (chr1, y1, y2, x1, x2, snps) 
+			print "%s\t%s\t%s\t%s\t%s\t%s" % (chrid, y1, y2, x1, x2, snps) 
 			#targets.append([chr1, y1, y2, x1, x2, snps])
