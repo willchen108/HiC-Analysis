@@ -14,7 +14,7 @@ for line in readfile:
     	chrid = chrid[0]
       	if chr1 == chrid:
       		if snps in range(x1-distance,x2+distance):
-				print "%s\t%s\t%s\t%s\t%s\t%s" % (chr1, x1, x2, y1, y2, snps) 
+      			print "%s\t%s\t%s\t%s\t%s\t%s" % (chr1, x1, x2, y1, y2, snps) 
 			elif snps in range(y1-distance,y2+distance):
 				print "%s\t%s\t%s\t%s\t%s\t%s" % (chr1, y1, y2, x1, x2, snps) 
 
