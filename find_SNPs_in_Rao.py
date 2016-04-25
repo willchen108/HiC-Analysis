@@ -10,8 +10,8 @@ distance = int(sys.arge[3])
 for line in readfile:
     chr1,x1,x2,chr2,y1,y2 = line.split()[0:6] 
     for line2 in SNPsfile:
-      	chrid, snps = line2.split()[0:2]
-      	chrid = chrid[0]
+    	chrid, snps = line2.split()[0:2]
+    	chrid = chrid[0]
       	if chr1 == chrid:
       		if snps in range(x1-distance,x2+distance):
 				print "%s\t%s\t%s\t%s\t%s\t%s" % (chr1, x1, x2, y1, y2, snps) 
