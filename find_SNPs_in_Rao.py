@@ -11,13 +11,13 @@ SNPsfile = open(sys.argv[2])
 distance = 0
 loops,targets = {},[]
 for line in readfile:
-    chr1,x1,x2,chr2,y1,y2 = line.split()[0:6] 
-    if chr1 != "chr1":
-        if chr1 in loops:
-            loops[chr1].append([int(x1),int(x2),int(y1),int(y2)])
-        else:
-            loops[chr1] = []
-            loops[chr1].append([int(x1),int(x2),int(y1),int(y2)])
+	chr1,x1,x2,chr2,y1,y2 = line.split()[0:6] 
+	if chr1 != "chr1":
+		if chr1 in loops:
+			loops[chr1].append([int(x1),int(x2),int(y1),int(y2)])
+		else:
+			loops[chr1] = []
+			loops[chr1].append([int(x1),int(x2),int(y1),int(y2)])
 
 for line in SNPsfile:
 	chrid, snps = line.split()[0:2]
@@ -29,5 +29,5 @@ for line in SNPsfile:
 			#targets.append([chr1, x1, x2, y1, y2, snps])
 			print "%s\t%s\t%s\t%s\t%s\t%s" % (chr1, x1, x2, y1, y2, snps) 
 		elif snps in range(y1,y2):
+			print "%s\t%s\t%s\t%s\t%s\t%s" % (chr1, y1, y2, x1, x2, snps) 
 			#targets.append([chr1, y1, y2, x1, x2, snps])
-
