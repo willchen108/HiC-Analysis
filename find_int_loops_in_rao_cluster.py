@@ -1,5 +1,5 @@
-snpsfile = open("~/data/snps_in_rao.bed")
-targetfile = open("~/data/gencode.v19_promoter_chr_removed.bed")
+snpsfile = open('~/data/snps_in_rao.bed')
+targetfile = open('~/data/gencode.v19_promoter_chr_removed.bed')
 
 SNPs = []
 for line in snpsfile:
