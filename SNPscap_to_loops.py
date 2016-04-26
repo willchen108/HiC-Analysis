@@ -13,5 +13,5 @@ for line in bed:
 		chrid, x1, x2, y1, y2 = loop.split()[0:5]
 		if x1 != "x1":
 			x1, x2, y1, y2 = int(x1), int(x2), int(y1), int(y2)
-			if chr1 == chrid:
+			if int(chr1) == int(chrid):
 				print "%s" % (line.rstrip('\n'))
