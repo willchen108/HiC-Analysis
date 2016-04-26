@@ -1,11 +1,12 @@
 #This file is created by Will @ 2016.04.24
 #This file is used to find the significant promoter(among the 2k promoters that we picked.) loops from the data from Rao's HiC paper.
 import os,sys,re
-from collections import Counter
+import csv
 from math import sqrt
 readfile = open("/Users/Will/Downloads/GSE63525_GM12878_primary+replicate_HiCCUPS_looplist.txt")
 SNPsfile = open("/Users/Will/Desktop/eqtl_capture_just_all_eqtls_all_promoter_snps_excluded_snp_coords_sorted_chr_removed.bed.txt")
 targetfile = open("/Users/Will/Desktop/gencode.v19_promoter_chr_removed.bed")
+
 loops,SNPs = {},[]
 for line in readfile:
 	chr1,x1,x2,chr2,y1,y2 = line.split()[0:6] 
@@ -37,7 +38,21 @@ for line in targetfile:
 	ch,st,end = line.split()[0:3]
 	st = int(st)
 	end = int(end)
+	mid = (st+end)/2
 	for snp in SNPs:
 		if snp[0] == ch:
-			if st in range(snp[3],snp[4]) or end in range(snp[3],snp[4]):
+			if mid in range(snp[3],snp[4]):
 				total.append([snp[0], snp[1], snp[2], snp[3], snp[4], snp[5],st, end])
+
+with open('snps_in_rao.txt', 'w') as fp:
+    a = csv.writer(fp,delimiter='\t')
+    a.writerow(['chrid'] + ['x1'] + ['x2'] + ['y1'] + ['y2'] + ['snps'])
+    for snp in SNPs:
+        a.writerow([str(snp[0])] + [str(snp[1])] + [str(snp[2])] + [str(snp[3])] + [str(snp[4])] + [str(snp[5])])
+
+with open('intersted_loops_in_rao.txt','w') as loops:
+    a = csv.writer(loops,delimiter='\t')
+    a.writerow(['chrid'] + ['x1'] + ['x2'] + ['y1'] + ['y2'] + ['snps'] + ['promoter_start'] + ['promoter_end'])
+    for loop in total:
+         a.writerow([str(loop[0])] + [str(loop[1])] + [str(loop[2])] + [str(loop[3])] + [str(loop[4])] + [str(loop[5])] + [str(loop[6])] + [str(loop[7])])
+

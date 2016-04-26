@@ -4,10 +4,6 @@ import os,sys,re
 from collections import Counter
 from math import sqrt
 
-readfile = open(sys.argv[1])
-targetfile = open(sys.argv[2])
-SNPsfile = open(sys.arge[3])
-
 readfile = open("/Users/Will/Downloads/GSE63525_GM12878_primary+replicate_HiCCUPS_looplist.txt")
 targetfile = open("/Users/Will/Desktop/gencode.v19_promoter_chr_removed.bed")
 loops,targets = {},{}
