@@ -6,13 +6,12 @@ import os,sys,re
 bed = open(sys.argv[1])
 loops = open(sys.argv[2])
 
-for read in bed:
-	chr1, f1, r1, chr2, f2, r2 = read.split()[0:6]
+for line in bed:
+	chr1, f1, r1, chr2, f2, r2 = line.split()[0:6]
 	f1, r1, f2, r2 = int(f1), int(r1), int(f2), int(r2)
 	for loop in loops:
 		chrid, x1, x2, y1, y2 = loop.split()[0:5]
 		if x1 != "x1":
 			x1, x2, y1, y2 = int(x1), int(x2), int(y1), int(y2)
 			if chr1 == chrid:
-				if f2 in range(y1-2500,y2+2500) or r2 in range(y1-2500,y2+2500) or f1 in range(y1-2500,y2+2500) or r1 in range(y1-2500,y2+2500):
-					print "%s" % (read.rstrip('\n'))
+				print "%s" % (line.rstrip('\n'))
