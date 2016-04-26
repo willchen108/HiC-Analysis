@@ -18,7 +18,10 @@ for loop in loopsfile:
 for line in bedfile:
 	chr1, f1, r1, chr2, f2, r2 = line.split()[0:6]
 	f1, r1, f2, r2 = int(f1), int(r1), int(f2), int(r2)
-	if chr1 == 'X'：continue 
+	try:
+		int(chr1)
+	except ValueError:
+		continue
 	for loc in loops[chr1]:
 		y1, y2 = loc[2:4]
 		if f1 in range(y1,y2) or r1 in range(y1,y2) or f2 in range(y1,y2) or r2 in range(y1,y2):
