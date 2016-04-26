@@ -26,4 +26,4 @@ for line in bedfile:
 		for loc in loops[chr1]:
 			y1, y2 = loc[2:4]
 			if f1 in range(y1,y2) or r1 in range(y1,y2) or f2 in range(y1,y2) or r2 in range(y1,y2):
-				print "%s" % (read.rstrip('\n'))
+				print "%s" % (line.rstrip('\n'))
