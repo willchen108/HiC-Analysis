@@ -11,8 +11,9 @@ for read in bed:
 	f1, r1, f2, r2 = int(f1), int(r1), int(f2), int(r2)
 	for loop in loops:
 		chrid, x1, x2, y1, y2 = loop.split()[0:5]
-		x1, x2, y1, y2 = int(x1), int(x2), int(y1), int(y2)
-		if chr1 == chrid:
-			if f2 in range(y1,y2) or r2 in range(y1,y2):
-				if f1 in range(x1,x2) or r1 in range(x1,x2):
-					print "%s" % (read.rstrip('\n'))
+		if x1 != "x1":
+			x1, x2, y1, y2 = int(x1), int(x2), int(y1), int(y2)
+			if chr1 == chrid:
+				if f2 in range(y1,y2) or r2 in range(y1,y2):
+					if f1 in range(x1,x2) or r1 in range(x1,x2):
+						print "%s" % (read.rstrip('\n'))
