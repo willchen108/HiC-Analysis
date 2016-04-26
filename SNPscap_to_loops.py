@@ -15,7 +15,7 @@ for loop in loopsfile:
 		loops[chrid] = []
 		loops[chrid].append([int(x1), int(x2), int(y1), int(y2)])
 
-for line in bed:
+for line in bedfile:
 	chr1, f1, r1, chr2, f2, r2 = line.split()[0:6]
 	f1, r1, f2, r2 = int(f1), int(r1), int(f2), int(r2)
 	for loc in loops[chr1]:
