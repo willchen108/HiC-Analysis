@@ -17,3 +17,6 @@ for read in bed:
 				if f2 in range(y1,y2) or r2 in range(y1,y2):
 					if f1 in range(x1,x2) or r1 in range(x1,x2):
 						print "%s" % (read.rstrip('\n'))
+				elif f1 in range(y1,y2) or r1 in range(y1,y2):
+					if f2 in range(x1,x2) or r2 in range(x1,x2):
+						print "%s" % (read.rstrip('\n'))
