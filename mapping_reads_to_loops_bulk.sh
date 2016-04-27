@@ -17,6 +17,6 @@ workdir=$1
 for i in 1 2 3 4 5 6 7 8 9 10
 do 
 projectdir=$workdir/$i
-python ~/HiC-Analysis/mapping_reads_to_loops.py $projectdir/${NAME[$i]}_1k.bed ~/data/loops_snps_promoter_list.txt > $projectdir/${NAME[$i]}_1k_in_loops.bed
-wait
+python ~/HiC-Analysis/mapping_reads_to_loops.py $projectdir/${NAME[$i]}_1k.bed ~/data/loops_snps_promoter_list.txt > $projectdir/${NAME[$i]}_1k_in_loops.bed &
+
 done
