@@ -24,7 +24,7 @@ for line in bedfile:
 		continue
 	if chr1 in loops:
 		for loc in loops[chr1]:
-			y1, y2 = loc[2:4]
+			x1, x2, y1, y2 = loc[0:4]
 			if f1 in range(y1,y2) or r1 in range(y1,y2):
 				if f2 in range(x1,x2) or r2 in range(x1,x2):
 					print "%s" % (line.rstrip('\n'))
