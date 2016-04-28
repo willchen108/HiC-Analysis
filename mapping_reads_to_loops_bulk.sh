@@ -1,5 +1,5 @@
 #Create by Will Chen @ 2016.04.11
-#require 2 cores 12G memory.
+#require 10 cores 20G memory.
 #USAGE: bed_partition_bulk.sh <workdirectory> example /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters/
 #VARS
 
