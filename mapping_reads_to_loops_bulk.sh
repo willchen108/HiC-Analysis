@@ -17,6 +17,6 @@ workdir=$1
 for i in 1 2 3 4 5 6 7 8 9 10
 do 
 projectdir=$workdir/$i
-qsub -pe serial 2 -l mfree=4G ~/HiC-Analysis/mapping_qsub.sh projectdir ${NAME[$i]}
+qsub -pe serial 2 -l mfree=4G ~/HiC-Analysis/mapping_qsub.sh $projectdir ${NAME[$i]}
 wait
 done
