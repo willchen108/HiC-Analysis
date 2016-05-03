@@ -17,6 +17,7 @@ vcfkeepsamples ALL.chr10.phase3_shapeit2_mvncall_integrated_v5a.20130502.genotyp
 
 for i in {1..22}
 do 
-python ~/HiC-Analysis/find_SNPs_vcf.py Chr$i.all.vcf ~/data/eqtl_capture_just_all_eqtls_all_promoter_snps_excluded_snp_coords_sorted_chr_removed.bed > /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/SNPs_release/SNPs_gntype/Chr$i.SNPs.bed
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/vcf_processing/find_SNPs_vcf.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/SNPs_release/Chr$i.all.vcf ~/data/eqtl_capture_just_all_eqtls_all_promoter_snps_excluded_snp_coords_sorted_chr_removed.bed > /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/SNPs_release/SNPs_gntype/Chr$i.SNPs.bed
 wait
 done
+

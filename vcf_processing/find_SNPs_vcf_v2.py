@@ -8,13 +8,12 @@ SNPsfile = open(sys.argv[2])
 SNPs={}
 
 for snp in SNPsfile:
-	chrid = snp.split()[0]
-	ref   = snp.split()[3]
+	chrid,p1,p2,ref = snp.split()[0:4]
 	if chrid in SNPs:
-		SNPs[chrid].append(ref)
+		SNPs[chrid].append([ref,p2])
 	else:
 		SNPs[chrid] = []
-		SNPs[chrid].append(ref)
+		SNPs[chrid].append([ref,p2])
 
 result = []
 for line in VCFfile:
@@ -24,8 +23,8 @@ for line in VCFfile:
 			#esult.append([Chrom, Pos, ID, s1, s2, s3, s4, s5, s6, s7, s8, s9])
 			print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % (Chrom, Pos, ID, s1, s2, s3, s4, s5, s6, s7, s8, s9)
 		else:
-			for ref in SNPs[Chrom]:
-				if ref == ID:
+			for snp in SNPs[Chrom]:
+				if snp[0] == ID or snp[1] == Pos:
 					if len(ALT) > 1:
 						allel = ALT.split(',')
 						allel.insert(0,REF)
