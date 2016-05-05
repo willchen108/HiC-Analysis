@@ -21,8 +21,8 @@ workdir=$1
 for i in 1 2 3 4 5 6 7 8 9 10
 do 
 projectdir=$workdir/$i
-python ~/scripts_will/bin_standard_hic_will.py  ~/scripts_will/hg19.genome $projectdir/${NAME[$i]}_1k.bed 1000000 > $projectdir/${NAME[$i]}_res1mb_1k.matrix &
-python ~/scripts_will/bin_standard_hic_will.py  ~/scripts_will/hg19.genome $projectdir/${NAME[$i]}_1k.bed 50000 > $projectdir/${NAME[$i]}_res50k_1k.matrix &
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/Contactmap/bin_standard_hic_will.py  /net/shendure/vol1/home/wchen108/data/hg19.genome $projectdir/${NAME[$i]}_1k.bed 1000000 > $projectdir/${NAME[$i]}_res1mb_1k.matrix &
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/Contactmap/bin_standard_hic_will.py  /net/shendure/vol1/home/wchen108/data/hg19.genome $projectdir/${NAME[$i]}_1k.bed 50000 > $projectdir/${NAME[$i]}_res50k_1k.matrix &
 wait
 Rscript ~/scripts_will/ggplot.r $projectdir ${NAME[$i]}_res1mb_1k.matrix "1Mb bin" &
 Rscript ~/scripts_will/ggplot.r $projectdir ${NAME[$i]}_res50k_1k.matrix "50kb bin" &
