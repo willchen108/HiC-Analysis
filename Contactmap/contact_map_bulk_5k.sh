@@ -18,8 +18,7 @@ NAME[8]=12872
 NAME[9]=12873
 NAME[10]=12874
 workdir=$1
-range=$2
-for i in $range
+for i in {1..10}
 do 
 projectdir=$workdir/$i
 python /net/shendure/vol1/home/wchen108/HiC-Analysis/Contactmap/bin_standard_hic_will.py  /net/shendure/vol1/home/wchen108/data/hg19.genome $projectdir/${NAME[$i]}_1k.bed 5000 > $projectdir/${NAME[$i]}_res5k_1k.matrix
