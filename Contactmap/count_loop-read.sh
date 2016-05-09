@@ -18,6 +18,5 @@ workdir=$1
 for i in 1 2 3 4 5 6 7 8 9 10
 do 
 projectdir=$workdir/$i
-python /net/shendure/vol1/home/wchen108/HiC-Analysis/Contactmap/bin_standard_hic_will.py $projectdir/${NAME[$i]}_1k.bed 1000000 >  &
 python /net/shendure/vol1/home/wchen108/HiC-Analysis/Contactmap/count_loop-reads.py $projectdir/${NAME[$i]}_res5k_1k.matrix /net/shendure/vol1/home/wchen108/data/loops_snps_bin.txt > $projectdir/${NAME[$i]}_res5k_1k.counts.bed
 done
