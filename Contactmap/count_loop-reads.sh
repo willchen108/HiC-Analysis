@@ -3,7 +3,6 @@
 #USAGE: count_loop-reads.sh <workdirectory> example /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters/
 #VARS 
 
-
 NAME[1]=10847
 NAME[2]=12814
 NAME[3]=12878

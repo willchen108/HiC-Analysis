@@ -1,11 +1,12 @@
 # This file is used to call the counts for 276 SNPs， including both reads_count and frequency.
 # usage: python /net/shendure/vol1/home/wchen108/HiC-Analysis/Contactmap/count_loop-reads.py matrixfile SNPs_bin file
 
+import os,sys,re
+from collections import Counter
+from math import sqrt
+
 Mfile = open(sys.argv[1])
 SNPsfile = open(sys.argv[2])
-
-#SNPsfile = open("/Users/Will/Desktop/loops_snps_bin.txt")
-#Mfile = open("/Users/Will/Desktop/10847_res5k_1k.matrix")
 
 SNPs = {}
 for snp in SNPsfile:
