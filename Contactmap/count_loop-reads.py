@@ -20,6 +20,8 @@ for snp in SNPsfile:
 print "%s\t%s\t%s\t%s\t%s\t%s" % ('Chrom', 'bin1', 'bin2', 'snp', 'count', 'norm_count')
 for line in Mfile:
 	bin1, bin2, count, freq, chrid = line.split()[0:5]
+	count = int(count)
+	freq = int(freq)
 	if chrid in SNPs.keys():
 		for loop in SNPs[chrid]:
 			if int(bin1) == loop[0] and int(bin2) == loop[1]:

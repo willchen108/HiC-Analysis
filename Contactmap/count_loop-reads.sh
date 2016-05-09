@@ -1,6 +1,6 @@
 #Create by Will Chen @ 2016.04.16
-#require 2 cores 16G memory.
-#USAGE: contact_map_bulk.sh <workdirectory> example /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters/
+#require 1 cores 5G memory.
+#USAGE: count_loop-reads.sh <workdirectory> example /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters/
 #VARS 
 
 
