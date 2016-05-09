@@ -1,5 +1,4 @@
-# This file is used to call the counts for 276 SNPs， including both reads_count and frequency.
-# usage: python /net/shendure/vol1/home/wchen108/HiC-Analysis/Contactmap/count_loop-reads.py matrixfile SNPs_bin file
+# This file is used to call the counts for 276 SNPs.
 
 import os,sys,re
 from collections import Counter
@@ -19,6 +18,7 @@ for snp in SNPsfile:
 			SNPs[chrid].append([int(bin1),int(bin2),int(s)])
 
 print "%s\t%s\t%s\t%s\t%s\t%s" % ('Chrom', 'bin1', 'bin2', 'snp', 'count', 'norm_count')
+
 for line in Mfile:
 	bin1, bin2, count, freq, chrid = line.split()[0:5]
 	count = int(count)
