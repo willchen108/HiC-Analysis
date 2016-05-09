@@ -1,6 +1,6 @@
 #Create by Will Chen @ 2016.05.08
 #require 1 cores 5G memory.
-#USAGE: /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup
+#USAGE: merge_snps_promoter_reads.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup
 #VARS 
 
 NAME[1]=10847

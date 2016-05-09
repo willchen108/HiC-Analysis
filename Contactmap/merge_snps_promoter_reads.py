@@ -35,5 +35,5 @@ for line in C2:
 
 
 for chrid in Merged:
-	for loop in Merged[i]:
+	for loop in Merged[chrid]:
 		print "%s\t%s\t%s\t%s\t%s\t%s" % (chrid,loop[0],loop[1],loop[2], loop[3],loop[4])
