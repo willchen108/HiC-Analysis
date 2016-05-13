@@ -1,7 +1,7 @@
 #Create by Will Chen @ 2016.05.13
 #requires 10 cores and 5G
 #usage sh GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters eQTL
-#					or     /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters promoters
+# 	or sh GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters promoters
 NAME[1]=10847
 NAME[2]=12814
 NAME[3]=12878
