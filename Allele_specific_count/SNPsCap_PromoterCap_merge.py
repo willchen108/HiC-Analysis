@@ -9,7 +9,7 @@ temp = {}
 for line in f1:
     if 'contig' not in line:
         Chrom, Pos, ID, REF, ALT, REFcount, ALTcount, TOTALcount = line.split()[0:8]
-        temp[(Chrom,ID)].append([Chrom, Pos, ID, REF, ALT, int(REFcount), int(ALTcount), int(TOTALcount)])
+        temp[(Chrom,ID)] = [Chrom, Pos, ID, REF, ALT, int(REFcount), int(ALTcount), int(TOTALcount)]
     else:
     	head = line.strip('\n')
 
@@ -21,7 +21,7 @@ for line in f2:
             temp[(Chrom,ID)][6] += int(ALTcount)
             temp[(Chrom,ID)][7] += int(TOTALcount)
         else:
-            temp[(Chrom,ID)]=[Chrom, Pos, ID, REF, ALT, int(REFcount), int(ALTcount), int(TOTALcount)]
+            temp[(Chrom,ID)] = [Chrom, Pos, ID, REF, ALT, int(REFcount), int(ALTcount), int(TOTALcount)]
 
 for i in temp:
 	print "%s" % (head)
