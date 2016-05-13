@@ -22,4 +22,7 @@ python /net/shendure/vol1/home/wchen108/HiC-Analysis/vcf_processing/find_SNPs_vc
 
 python /net/shendure/vol1/home/wchen108/HiC-Analysis/vcf_processing/find_SNPs_vcf_v2.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/SNPs_release/Chr7.all.vcf ~/data/eqtl_capture_just_all_eqtls_all_promoter_snps_excluded_snp_coords_sorted_chr_removed.bed > /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/SNPs_release/SNPs_gntype/Chr7_v2.SNPs.bed
 
-
+for i in {1..22}
+do
+vcftools --vcf Chr$i.all.vcf --snps /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/rsID.bed --recode --recode-INFO-all --out eQTL_SNPs/Chr$i.eQTL_SNPs 
+done
