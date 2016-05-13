@@ -1,7 +1,8 @@
 #Create by Will Chen @ 2016.05.13
 #requires 10 cores and 5G
-#usage sh GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters eQTL
-# 	or sh GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters promoters
+#usage sh ~/HiC-Analysis/GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters eQTL
+# 	or sh ~/HiC-Analysis/GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters promoters
+
 NAME[1]=10847
 NAME[2]=12814
 NAME[3]=12878
@@ -22,7 +23,7 @@ projectdir=$workdir/$i
    -T ASEReadCounter \
    -o $projectdir/${NAME[$i]}_$suffix.csv \
    -I $projectdir/${NAME[$i]}_merged_RG.sorted.bam \
-   -sites /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/SNPs_release/eQTL_SNPs/samples/NA${NAME[$i]}_eQTL_SNPs.vcf \
+   -sites /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/SNPs_release/eQTL_SNPs/Biallelic_eQTL_SNPs.vcf \
    -U ALLOW_N_CIGAR_READS \
    &
 done
