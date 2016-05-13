@@ -8,7 +8,7 @@ for line in VCFfile:
 	else:
 		Chrom, Pos, ID= line.split()[0:3]
 		if ID in IDs: 
-			print 'copy'
+			test = 1
 		else:
 			IDs[ID] = []
 			print line.strip('\n')
