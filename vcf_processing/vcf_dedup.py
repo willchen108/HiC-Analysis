@@ -11,4 +11,5 @@ for line in VCFfile:
 		if ID in IDs: 
 			break
 		else:
+			IDs[ID] = []
 			print line.strip('\n')
