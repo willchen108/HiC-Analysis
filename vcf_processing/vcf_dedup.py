@@ -1,6 +1,6 @@
 import os,sys,re
 import csv
-from math import sqrt
+
 VCFfile = open(sys.argv[1])
 IDs = {}
 for line in VCFfile:
@@ -9,7 +9,7 @@ for line in VCFfile:
 	else:
 		ID = line.split()[2]
 		if ID in IDs: 
-			break
+			test =1
 		else:
 			IDs[ID] = []
 			print line.strip('\n')
