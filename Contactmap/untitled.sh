@@ -16,7 +16,7 @@ NAME[10]=12874
 for i in {1..10}
 do 
 cd $i
-samtools merge ${NAME[$i]}_merged.bam ${NAME[$i]}_*_R1_001.fastq.bam ${NAME[$i]}_*_R2_001.fastq.bam
+samtools sort -o ${NAME[$i]}_merged_RG.sorted.bam ${NAME[$i]}_merged_RG.bam
 cd ../
 done
 
