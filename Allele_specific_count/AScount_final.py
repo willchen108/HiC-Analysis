@@ -13,7 +13,7 @@ f6 = open(sys.argv[6])
 f7 = open(sys.argv[7])
 f8 = open(sys.argv[8])
 f9 = open(sys.argv[9])
-vcffile = open(sys.argv[10])
+VCFfile = open(sys.argv[10])
 
 table = {}
 for line in VCFfile:
@@ -67,8 +67,6 @@ for line in f9:
     if 'contig' not in line:
         Chrom, Pos, ID, REF, ALT, REFcount, ALTcount, TOTALcount = line.split()[0:8]
         table[(Chrom, Pos, ID, REF, ALT)][24:27] = [int(REFcount),int(ALTcount),int(TOTALcount)]
-
-
 
 for key in table:
     print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % \
