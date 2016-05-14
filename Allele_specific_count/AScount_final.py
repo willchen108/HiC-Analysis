@@ -69,7 +69,7 @@ for line in f9:
         table[(Chrom, Pos, ID, REF, ALT)][24:27] = [int(REFcount),int(ALTcount),int(TOTALcount)]
 
 print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % \
-    ('Chrom', 'Pos', 'ID', 'REF', 'ALT', 'NA10847', ‘ ’, ‘ ’, 'NA12814', ‘ ’, ‘ ’, 'NA12878', ‘ ’, ‘ ’, 'NA12815', ‘ ’, ‘ ’, 'NA12812', ‘ ’, ‘ ’, 'NA12813', ‘ ’, ‘ ’, 'NA12872', ‘ ’, ‘ ’, 'NA12873', ‘ ’, ‘ ’, 'NA12874', ‘ ’, ‘ ’)
+    ('#Chrom', 'Pos', 'ID', 'REF', 'ALT', 'NA10847', ‘ ’, ‘ ’, 'NA12814', ‘ ’, ‘ ’, 'NA12878', ‘ ’, ‘ ’, 'NA12815', ‘ ’, ‘ ’, 'NA12812', ‘ ’, ‘ ’, 'NA12813', ‘ ’, ‘ ’, 'NA12872', ‘ ’, ‘ ’, 'NA12873', ‘ ’, ‘ ’, 'NA12874', ‘ ’, ‘ ’)
 
 for key in table:
     print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % \
