@@ -70,6 +70,6 @@ for line in f9:
 
 for key in table:
     print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % \
-    (key[0], key[1], key[2], key[3], key[4], key[5], table[key][0], table[key][1], table[key][2], table[key][3], table[key][4], table[key][5], table[key][6],\
+    (key[0], key[1], key[2], key[3], key[4], table[key][0], table[key][1], table[key][2], table[key][3], table[key][4], table[key][5], table[key][6],\
      table[key][7], table[key][8], table[key][9], table[key][10], table[key][11], table[key][12], table[key][13], table[key][14], table[key][15], table[key][16],\
       table[key][17], table[key][18], table[key][19], table[key][20], table[key][21], table[key][22], table[key][23], table[key][24], table[key][25], table[key][26])
