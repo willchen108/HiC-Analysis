@@ -68,6 +68,9 @@ for line in f9:
         Chrom, Pos, ID, REF, ALT, REFcount, ALTcount, TOTALcount = line.split()[0:8]
         table[(Chrom, Pos, ID, REF, ALT)][24:27] = [int(REFcount),int(ALTcount),int(TOTALcount)]
 
+print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % \
+    ('Chrom', 'Pos', 'ID', 'REF', 'ALT', 'NA10847', ‘ ’, ‘ ’, 'NA12814', ‘ ’, ‘ ’, 'NA12878', ‘ ’, ‘ ’, 'NA12815', ‘ ’, ‘ ’, 'NA12812', ‘ ’, ‘ ’, 'NA12813', ‘ ’, ‘ ’, 'NA12872', ‘ ’, ‘ ’, 'NA12873', ‘ ’, ‘ ’, 'NA12874', ‘ ’, ‘ ’)
+
 for key in table:
     print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % \
     (key[0], key[1], key[2], key[3], key[4], table[key][0], table[key][1], table[key][2], table[key][3], table[key][4], table[key][5], table[key][6],\
