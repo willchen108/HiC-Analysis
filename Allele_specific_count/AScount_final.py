@@ -5,7 +5,7 @@
 import os,sys,re
 
 f1 = open(sys.argv[1])
-f3 = open(sys.argv[2])
+f2 = open(sys.argv[2])
 f3 = open(sys.argv[3])
 f4 = open(sys.argv[4])
 f5 = open(sys.argv[5])
