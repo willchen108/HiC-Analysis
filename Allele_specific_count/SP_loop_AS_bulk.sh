@@ -48,3 +48,5 @@ samtools sort -o ${NAME[$i]}_merged_subset_RG.sorted.bam ${NAME[$i]}_merged_subs
 
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar BuildBamIndex \
       I=${NAME[$i]}_merged_subset_RG.sorted.bam
+
+done 
