@@ -23,3 +23,6 @@ for line in bed_r2:
 		else:
 			org[title] = 0
 			org[title] += 1
+
+for i in org:
+	print "%s\t%s" % (i, org[i]) 
