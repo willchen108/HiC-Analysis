@@ -12,7 +12,7 @@ NAME[8]=12872
 NAME[9]=12873
 NAME[10]=12874
 projdir=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters
-for i in {1..10}
+for i in {1..3}
 do 
 cd $projdir/$i
 intersectBed -a ${NAME[$i]}_S${i}_R1_001.fastq.bed -b /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed > temp1.bed &
@@ -43,8 +43,6 @@ wait
 
 samtools merge ${NAME[$i]}_merged_subset.bam temp1.bam temp2.bam
 
-#rm temp*
-
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar AddOrReplaceReadGroups \
 		I=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters/$i/${NAME[$i]}_merged_subset.bam \
 		O=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters/$i/${NAME[$i]}_merged_subset_RG.bam  \
@@ -55,8 +53,8 @@ java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar A
 		RGSM=20
 wait
 samtools sort -o ${NAME[$i]}_merged_subset_RG.sorted.bam ${NAME[$i]}_merged_subset_RG.bam
-
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar BuildBamIndex \
       I=${NAME[$i]}_merged_subset_RG.sorted.bam\
 
+rm temp*
 done 
