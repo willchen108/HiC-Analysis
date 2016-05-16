@@ -26,12 +26,12 @@ awk -v x=1 '{print $x}' merged_temp.bed > ${NAME[$i]}_IDlist.txt
 rm merged_temp.bed
 
 # Subset sam file with IDs
-LC_ALL=C grep -w -F -f ${NAME[$i]}_IDlist.txt  < ${NAME[$i]}_*R1_001.fastq.sam > temp1.sam &
-LC_ALL=C grep -w -F -f ${NAME[$i]}_IDlist.txt  < ${NAME[$i]}_*R2_001.fastq.sam > temp2.sam &
+LC_ALL=C grep -w -F -f ${NAME[$i]}_IDlist.txt  < ${NAME[$i]}_*_R1_001.fastq.sam > temp1.sam &
+LC_ALL=C grep -w -F -f ${NAME[$i]}_IDlist.txt  < ${NAME[$i]}_*_R2_001.fastq.sam > temp2.sam &
 wait
 
-samtools view -H ${NAME[$i]}_*R1_001.fastq.sam > temp_head1.sam &
-samtools view -H ${NAME[$i]}_*R2_001.fastq.sam > temp_head2.sam &
+samtools view -H ${NAME[$i]}_*_R1_001.fastq.sam > temp_head1.sam &
+samtools view -H ${NAME[$i]}_*_R2_001.fastq.sam > temp_head2.sam &
 wait
 
 cat temp_head1.sam temp1.sam > temp1_head.sam &
@@ -45,7 +45,7 @@ wait
 
 samtools merge ${NAME[$i]}_merged_subset.bam temp1.bam temp2.bam
 
-rm temp.*
+rm temp*
 
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar AddOrReplaceReadGroups \
 		I=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters/$i/${NAME[$i]}_merged_subset.bam \
