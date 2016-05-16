@@ -11,7 +11,7 @@ NAME[7]=12875
 NAME[8]=12872
 NAME[9]=12873
 NAME[10]=12874
-projdir = /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters
+projdir=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters
 for i in {1..10}
 do 
 cd $projdir/$i
