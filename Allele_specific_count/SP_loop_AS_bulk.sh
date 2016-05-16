@@ -23,16 +23,18 @@ python ~/HiC-Analysis/Allele_specific_count/merge_bed.py temp1.bed temp2.bed > m
 
 awk -v x=1 '{print $x}' merged_temp.bed > ${NAME[$i]}_IDlist.txt
 
-rm merged_temp.bed temp1 temp2
+rm merged_temp.bed
 
 # Subset sam file with IDs
-LC_ALL=C grep -w -F -f ${NAME[$i]}_IDlist.txt  < ${NAME[$i]}_*R1_001.fastq.sam > temp1.sam
+LC_ALL=C grep -w -F -f ${NAME[$i]}_IDlist.txt  < ${NAME[$i]}_*R1_001.fastq.sam > temp1.sam &
+LC_ALL=C grep -w -F -f ${NAME[$i]}_IDlist.txt  < ${NAME[$i]}_*R2_001.fastq.sam > temp2.sam &
 wait
 
 #Convert sam file to bam file and merge bam files.
 samtools view -bS temp1.sam > temp1.bam&
 samtools view -bS temp2.sam > temp2.bam&
 wait
+
 samtools merge ${NAME[$i]}_merged_subset.bam temp1.bam temp2.bam
 
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar AddOrReplaceReadGroups \
