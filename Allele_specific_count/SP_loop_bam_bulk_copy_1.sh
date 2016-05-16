@@ -44,8 +44,8 @@ wait
 samtools merge ${NAME[$i]}_merged_subset.bam temp1.bam temp2.bam
 
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar AddOrReplaceReadGroups \
-		I=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters/$i/${NAME[$i]}_merged_subset.bam \
-		O=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters/$i/${NAME[$i]}_merged_subset_RG.bam  \
+		I=$projdir/$i/${NAME[$i]}_merged_subset.bam \
+		O=$projdir/$i/${NAME[$i]}_merged_subset_RG.bam  \
 		RGID=NA${NAME[$i]} \
 		RGLB=lib1 \
 		RGPL=illumina \
