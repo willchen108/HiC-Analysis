@@ -12,7 +12,7 @@ NAME[8]=12872
 NAME[9]=12873
 NAME[10]=12874
 projdir=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters
-for i in {1}
+for i in {1..2}
 do 
 cd $projdir/$i
 intersectBed -a ${NAME[$i]}_*_R1_001.fastq.bed -b /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed > temp1.bed &
