@@ -1,7 +1,7 @@
 # This file is create by Will @ 2016.05.14
 # This file is used to combine the allele counts across 9 samples.
 # Usage cd /net/shendure/vol1/home/wchen108/data/AScount/ 
-# python /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/AScount_final.py 10847_merged_count.csv 12814_merged_count.csv 12878_merged_count.csv 12815_merged_count.csv 12812_merged_count.csv 12813_merged_count.csv 12872_merged_count.csv 12873_merged_count.csv 12874_merged_count.csv /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/SNPs_release/eQTL_SNPs/Biallelic_eQTL_SNPs.vcf > /net/shendure/vol1/home/wchen108/data/AScount/AScount_9samples.csv
+# python /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/AScount_final.py 10847_merged_count.csv 12814_merged_count.csv 12878_merged_count.csv 12815_merged_count.csv 12812_merged_count.csv 12813_merged_count.csv 12872_merged_count.csv 12873_merged_count.csv 12874_merged_count.csv /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/SNPs_release/eQTL_SNPs/Biallelic_eQTL_SNPs.vcf > /net/shendure/vol1/home/wchen108/data/AScount/AScount_9samples_v2.csv
 import os,sys,re
 
 f1 = open(sys.argv[1])
@@ -20,7 +20,7 @@ for line in VCFfile:
     if '#' in line:
         continue
     else:
-        Chrom, Pos, ID, REF, ALT, QUAL, FILTER, INFO, FORMAT, s1, s2, s3, s4, s5, s6, s7, s8, s9 = line.split()[0:18]
+        Chrom, Pos, ID, Ref, ALT, QUAL, FILTER, INFO, FORMAT, s1, s2, s3, s4, s5, s6, s7, s8, s9 = line.split()[0:18]
         table[(Chrom, Pos, ID, Ref, ALT)] = [0]*36
         table[(Chrom, Pos, ID, Ref, ALT)][3] ,table[(Chrom, Pos, ID, Ref, ALT)][7] ,table[(Chrom, Pos, ID, Ref, ALT)][11],\
         table[(Chrom, Pos, ID, Ref, ALT)][15],table[(Chrom, Pos, ID, Ref, ALT)][19],table[(Chrom, Pos, ID, Ref, ALT)][23],\
