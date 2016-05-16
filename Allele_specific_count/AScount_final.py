@@ -20,8 +20,12 @@ for line in VCFfile:
     if '#' in line:
         continue
     else:
-        Chrom, Pos, ID, Ref, ALT= line.split()[0:5]
-        table[(Chrom, Pos, ID, Ref, ALT)] = [0]*27
+        Chrom, Pos, ID, REF, ALT, QUAL, FILTER, INFO, FORMAT, s1, s2, s3, s4, s5, s6, s7, s8, s9 = line.split()[0:18]
+        table[(Chrom, Pos, ID, Ref, ALT)] = [0]*36
+        table[(Chrom, Pos, ID, Ref, ALT)][3] ,table[(Chrom, Pos, ID, Ref, ALT)][7] ,table[(Chrom, Pos, ID, Ref, ALT)][11],\
+        table[(Chrom, Pos, ID, Ref, ALT)][15],table[(Chrom, Pos, ID, Ref, ALT)][19],table[(Chrom, Pos, ID, Ref, ALT)][23],\
+        table[(Chrom, Pos, ID, Ref, ALT)][27],table[(Chrom, Pos, ID, Ref, ALT)][31],table[(Chrom, Pos, ID, Ref, ALT)][35] =\
+        s1, s2, s3, s4, s5, s6, s7, s8, s9
 
 for line in f1:
     if 'contig' not in line:
@@ -31,48 +35,48 @@ for line in f1:
 for line in f2:
     if 'contig' not in line:
         Chrom, Pos, ID, REF, ALT, REFcount, ALTcount, TOTALcount = line.split()[0:8]
-        table[(Chrom, Pos, ID, REF, ALT)][3:6] = [int(REFcount),int(ALTcount),int(TOTALcount)]
+        table[(Chrom, Pos, ID, REF, ALT)][4:7] = [int(REFcount),int(ALTcount),int(TOTALcount)]
 
 for line in f3:
     if 'contig' not in line:
         Chrom, Pos, ID, REF, ALT, REFcount, ALTcount, TOTALcount = line.split()[0:8]
-        table[(Chrom, Pos, ID, REF, ALT)][6:9] = [int(REFcount),int(ALTcount),int(TOTALcount)]
+        table[(Chrom, Pos, ID, REF, ALT)][8:11] = [int(REFcount),int(ALTcount),int(TOTALcount)]
 
 for line in f4:
     if 'contig' not in line:
         Chrom, Pos, ID, REF, ALT, REFcount, ALTcount, TOTALcount = line.split()[0:8]
-        table[(Chrom, Pos, ID, REF, ALT)][9:12] = [int(REFcount),int(ALTcount),int(TOTALcount)]
+        table[(Chrom, Pos, ID, REF, ALT)][12:15] = [int(REFcount),int(ALTcount),int(TOTALcount)]
 
 for line in f5:
     if 'contig' not in line:
         Chrom, Pos, ID, REF, ALT, REFcount, ALTcount, TOTALcount = line.split()[0:8]
-        table[(Chrom, Pos, ID, REF, ALT)][12:15] = [int(REFcount),int(ALTcount),int(TOTALcount)]
+        table[(Chrom, Pos, ID, REF, ALT)][16:19] = [int(REFcount),int(ALTcount),int(TOTALcount)]
 
 for line in f6:
     if 'contig' not in line:
         Chrom, Pos, ID, REF, ALT, REFcount, ALTcount, TOTALcount = line.split()[0:8]
-        table[(Chrom, Pos, ID, REF, ALT)][15:18] = [int(REFcount),int(ALTcount),int(TOTALcount)]
+        table[(Chrom, Pos, ID, REF, ALT)][20:23] = [int(REFcount),int(ALTcount),int(TOTALcount)]
 
 for line in f7:
     if 'contig' not in line:
         Chrom, Pos, ID, REF, ALT, REFcount, ALTcount, TOTALcount = line.split()[0:8]
-        table[(Chrom, Pos, ID, REF, ALT)][18:21] = [int(REFcount),int(ALTcount),int(TOTALcount)]
+        table[(Chrom, Pos, ID, REF, ALT)][24:27] = [int(REFcount),int(ALTcount),int(TOTALcount)]
 
 for line in f8:
     if 'contig' not in line:
         Chrom, Pos, ID, REF, ALT, REFcount, ALTcount, TOTALcount = line.split()[0:8]
-        table[(Chrom, Pos, ID, REF, ALT)][21:24] = [int(REFcount),int(ALTcount),int(TOTALcount)]
+        table[(Chrom, Pos, ID, REF, ALT)][28:31] = [int(REFcount),int(ALTcount),int(TOTALcount)]
 
 for line in f9:
     if 'contig' not in line:
         Chrom, Pos, ID, REF, ALT, REFcount, ALTcount, TOTALcount = line.split()[0:8]
-        table[(Chrom, Pos, ID, REF, ALT)][24:27] = [int(REFcount),int(ALTcount),int(TOTALcount)]
+        table[(Chrom, Pos, ID, REF, ALT)][32:35] = [int(REFcount),int(ALTcount),int(TOTALcount)]
 
-print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % \
-    ('#Chrom', 'Pos', 'ID', 'REF', 'ALT', 'NA10847', ' ', ' ', 'NA12814', ' ', ' ', 'NA12878', ' ', ' ', 'NA12815', ' ', ' ', 'NA12812', ' ', ' ', 'NA12813', ' ', ' ', 'NA12872', ' ', ' ', 'NA12873', ' ', ' ', 'NA12874', ' ', ' ')
+print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % \
+    ('#Chrom', 'Pos', 'ID', 'REF', 'ALT', 'NA10847', ' ', ' ', 'Genotype', 'NA12814', ' ', ' ','Genotype', 'NA12878', ' ', ' ', 'Genotype', 'NA12815', ' ', ' ', 'Genotype', 'NA12812', ' ', ' ', 'Genotype', 'NA12813', ' ', ' ', 'Genotype', 'NA12872', ' ', ' ', 'Genotype', 'NA12873', ' ', ' ', 'Genotype', 'NA12874', ' ', ' ','Genotype')
 
 for key in table:
-    print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % \
+    print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % \
     (key[0], key[1], key[2], key[3], key[4], table[key][0], table[key][1], table[key][2], table[key][3], table[key][4], table[key][5], table[key][6],\
      table[key][7], table[key][8], table[key][9], table[key][10], table[key][11], table[key][12], table[key][13], table[key][14], table[key][15], table[key][16],\
-      table[key][17], table[key][18], table[key][19], table[key][20], table[key][21], table[key][22], table[key][23], table[key][24], table[key][25], table[key][26])
+      table[key][17], table[key][18], table[key][19], table[key][20], table[key][21], table[key][22], table[key][23], table[key][24], table[key][25], table[key][26],table[key][27],table[key][28],table[key][29],table[key][30],table[key][31],table[key][32],table[key][33],table[key][34],table[key][35])
