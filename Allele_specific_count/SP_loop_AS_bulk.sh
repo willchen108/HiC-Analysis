@@ -12,7 +12,7 @@ NAME[8]=12872
 NAME[9]=12873
 NAME[10]=12874
 projdir=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters
-for i in {1..10}
+for i in {1}
 do 
 cd $projdir/$i
 intersectBed -a ${NAME[$i]}_*_R1_001.fastq.bed -b /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed > temp1.bed &
@@ -30,12 +30,22 @@ LC_ALL=C grep -w -F -f ${NAME[$i]}_IDlist.txt  < ${NAME[$i]}_*R1_001.fastq.sam >
 LC_ALL=C grep -w -F -f ${NAME[$i]}_IDlist.txt  < ${NAME[$i]}_*R2_001.fastq.sam > temp2.sam &
 wait
 
+samtools view -H ${NAME[$i]}_*R1_001.fastq.sam > temp_head1.sam &
+samtools view -H ${NAME[$i]}_*R2_001.fastq.sam > temp_head2.sam &
+wait
+
+cat temp_head1.sam temp1.sam > temp1_head.sam &
+cat temp_head2.sam temp2.sam > temp2_head.sam &
+wait 
+
 #Convert sam file to bam file and merge bam files.
-samtools view -bS temp1.sam > temp1.bam&
-samtools view -bS temp2.sam > temp2.bam&
+samtools view -bS temp1_head.sam > temp1.bam&
+samtools view -bS temp2_head.sam > temp2.bam&
 wait
 
 samtools merge ${NAME[$i]}_merged_subset.bam temp1.bam temp2.bam
+
+rm temp.*
 
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar AddOrReplaceReadGroups \
 		I=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters/$i/${NAME[$i]}_merged_subset.bam \
@@ -49,6 +59,5 @@ wait
 samtools sort -o ${NAME[$i]}_merged_subset_RG.sorted.bam ${NAME[$i]}_merged_subset_RG.bam
 
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar BuildBamIndex \
-      I=${NAME[$i]}_merged_subset_RG.sorted.bam
-
+      I=${NAME[$i]}_merged_subset_RG.sorted.bam\
 done 
