@@ -1,4 +1,5 @@
 #Create by Will Chen @ 2016.05.16
+#This file is used to subset the SNPs that are looping to promoters from the bam file. I call it SP_loop.
 #requires 2 cores and 5G
 #
 NAME[1]=10847

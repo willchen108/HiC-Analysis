@@ -1,6 +1,6 @@
 #Create by Will Chen @ 2016.05.16
 #requires 10 cores and 5G
-#usage sh ~/HiC-Analysis/GATK_ASE_bulk_subset.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters eQTL
+#usage sh ~/HiC-Analysis/Allele_specific_count/GATK_ASE_bulk_subset.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters eQTL
 # 	or sh ~/HiC-Analysis/GATK_ASE_bulk_subset.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters promoters
 
 NAME[1]=10847
