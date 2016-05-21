@@ -1,6 +1,4 @@
 #Create by Will Chen @ 2016.05.13
-
-
 NAME[1]=10847
 NAME[2]=12814
 NAME[3]=12878
@@ -17,4 +15,3 @@ p1=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promote
 p2=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters/$i
 python ~/HiC-Analysis/Allele_specific_count/SNPsCap_PromoterCap_merge.py $p1/${NAME[$i]}_eQTL.csv $p2/${NAME[$i]}_promoters.csv > /net/shendure/vol1/home/wchen108/data/AScount/${NAME[$i]}_merged_count.csv &
 done
-
