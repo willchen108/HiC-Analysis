@@ -17,9 +17,9 @@ for line in VCFfile:
         	VCF[Chrom] = []
         	VCF[Chrom].append([Pos,Ref,ALT])
 
-temp  = 'chr.snps.txt'
+temp  = '.snps.txt'
 for i in range(1,23):
-    fname = temp[0:3] + str(i) +temp[3:]
+    fname = str(i) +temp
     with open(fname, 'w') as file:
         for snp in VCF[str(i)]:
             string = snp[0] + '\t' + snp[1] + '\t' + snp[2] + '\n'
