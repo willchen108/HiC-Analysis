@@ -1,5 +1,6 @@
 #Create by Will Chen @ 2016.05.23
 # This file is used to subset the bed file with loops that are SNP-promoter loops.
+# /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed
 
 import os,sys,re
 #BED file of mapped reads
@@ -28,6 +29,7 @@ for line in bed:
 	species2 = split[3] #ChrID of Mate 2
 	if mapq > 0:#Keep tally of reads with MAPQ > 0
 		if species1 == species2:
-			for i in promoters[species1]:
-				if i[0] < fcoord1 < i[1] or i[0] < rcoord1 < i[1] or i[0] < fcoord2 < i[1] or i[0] < rcoord2 < i[1]:
-					print "%s" % (line.rstrip('\n'))
+			if species1 in promoters:
+				for i in promoters[species1]:
+					if i[0] < fcoord1 < i[1] or i[0] < rcoord1 < i[1] or i[0] < fcoord2 < i[1] or i[0] < rcoord2 < i[1]:
+						print "%s" % (line.rstrip('\n'))
