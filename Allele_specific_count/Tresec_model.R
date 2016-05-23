@@ -1,5 +1,6 @@
 data <- read.delim('/net/shendure/vol1/home/wchen108/data/AScount/AScount_9samples_v2_sorted.csv',header=T)
-
+data <- read.delim('/Users/Will/Desktop/AScount/AScount_9samples_v2_sorted.csv',header=T)
+samp <- c(6,10,14,18,22,26,30,34)
 #change genotypes to work with asSeq
 genos <- t(data[,samp+3])
 genos[which(genos=='0|0')] <- 0
@@ -29,7 +30,7 @@ genos[which(genos=='1|1')] <- 4
 genos <- apply(genos,2,as.numeric)
 
 #use total read coverage as a covariate
-cov<-read.csv('/net/shendure/vol1/home/wchen108/data/AScount/seq_coverage.csv',header=T)
+cov<-read.csv('/Users/Will/Desktop/AScount/seq_coverage.csv',header=T)
 cov2<-as.matrix(cov[c(1:6,8:10),2:4])
 
 eChr = mChr = as.integer(data[,1])
