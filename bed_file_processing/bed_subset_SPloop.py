@@ -31,5 +31,6 @@ for line in bed:
 		if species1 == species2:
 			if species1 in promoters:
 				for i in promoters[species1]:
-					if i[0] < fcoord1 < i[1] or i[0] < rcoord1 < i[1] or i[0] < fcoord2 < i[1] or i[0] < rcoord2 < i[1]:
-						print "%s" % (line.rstrip('\n'))
+					if rcoord2 - fcoord1 > 1000: 
+						if i[0] < fcoord1 < i[1] or i[0] < rcoord1 < i[1] or i[0] < fcoord2 < i[1] or i[0] < rcoord2 < i[1]:
+							print "%s" % (line.rstrip('\n'))
