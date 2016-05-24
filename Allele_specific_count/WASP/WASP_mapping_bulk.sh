@@ -1,8 +1,8 @@
 #Create by Will Chen @ 2016.05.24
 #requires 10 cores and 10G
 #Used to run WASP_mapping pipeline
-#usage sh ~/HiC-Analysis/WASP/WASP_mapping_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters
-# 	or sh ~/HiC-Analysis/WASP/WASP_mapping_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters
+#usage sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters
+# 	or  ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters
 
 NAME[1]=10847
 NAME[2]=12814
@@ -17,5 +17,5 @@ NAME[10]=12874
 workdir=$1
 for i in {1..10}
 do 
-sh ~/HiC-Analysis/WASP/WASP_mapping.sh $workdir/$i ${NAME[$i]} &
+sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh $workdir/$i ${NAME[$i]} &
 done
