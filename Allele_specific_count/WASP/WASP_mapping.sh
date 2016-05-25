@@ -9,7 +9,7 @@ NAME=$2
 cd $projdir
 
 #Step 2 
-python ~/tools/WASP/mapping/find_intersecting_snps.py ${NAME}_merged_RG.bam /net/shendure/vol1/home/wchen108/data/SNPlist_wasp/ 
+python ~/tools/WASP/mapping/find_intersecting_snps.py ${NAME}_merged_RG.bam /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/SNPlist_wasp/
 
 #Step 3
 bwa mem /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs37d5/hs37d5.fa ${NAME}_merged_RG.remap.fq.gz > ${NAME}_merged_RG.remapped.sam
