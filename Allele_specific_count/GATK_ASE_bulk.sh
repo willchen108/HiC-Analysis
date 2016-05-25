@@ -22,7 +22,7 @@ projectdir=$workdir/$i
    -R /net/shendure/vol10/nobackup/shared/genomes/human_g1k_hs37d5/hs37d5.fa \
    -T ASEReadCounter \
    -o $projectdir/${NAME[$i]}_$suffix.csv \
-   -I $projectdir/${NAME[$i]}.wasp.sorted.bam \
+   -I $projectdir/${NAME[$i]}_subset.wasp.sorted.bam \
    -sites /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/SNPs_release/eQTL_SNPs/Biallelic_eQTL_SNPs.vcf \
    -U ALLOW_N_CIGAR_READS \
    &
