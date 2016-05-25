@@ -1,6 +1,7 @@
 #Create by Will Chen @ 2016.05.23
 # This file is used to subset the bed file with loops that are SNP-promoter loops.
-# /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed
+# python ~/HiC-Analysis/bed_file_processing/bed_subset_SPloop.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed $workdir/${NAME[$i]}.bed.deduped > $workdir/Promoters/$i/${NAME[$i]}_SPloops_promotercap_1k.dedup.bed &
+
 
 import os,sys,re
 #BED file of mapped reads

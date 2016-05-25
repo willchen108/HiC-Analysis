@@ -2,7 +2,7 @@
 #requires 10 cores and 10G
 #Used to run WASP_mapping pipeline
 #usage sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters
-# 	or  ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters
+# 	or  sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters
 
 NAME[1]=10847
 NAME[2]=12814
