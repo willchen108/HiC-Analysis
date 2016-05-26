@@ -1,7 +1,7 @@
 #Create by Will Chen @ 2016.05.25
 # This file is used to create promoter centered loop counts plot. Each promoter has a 41 cells(or 101 cells,depending on theresolution, 5kb or 1kb) long array, with count of looping to promoter.
 #promoter is 101th and 500kb upstream is [1-100] 500kb downstream is [102-201]. 0 is reads that are >100kb upstream; 202 is >100kb downstream.
-# python ~/HiC-Analysis/bed_file_processing/promoter_looping_map.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed ${NAME[$i]}_joint_SPloops_1k.dedup.bed > ${NAME[$i]}_SPloops.matrix &
+# python ~/HiC-Analysis/bed_file_processing/promoter_looping_map_500k.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed ${NAME[$i]}_joint_SPloops_1k.dedup.bed &
 
 import pickle
 import os,sys,re
@@ -11,7 +11,7 @@ bed = open(sys.argv[2])
 prefix = sys.argv[2].split('_')[0]
 #Just a list with different types of ligation junctions
 res = 5000
-num = int(500000/res) + 3
+num = int(1000000/res) + 3
 promoters = {}
 prom_list = []
 for line in bedfile:
