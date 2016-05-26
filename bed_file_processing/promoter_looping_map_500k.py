@@ -1,14 +1,14 @@
 #Create by Will Chen @ 2016.05.25
 # This file is used to create promoter centered loop counts plot. Each promoter has a 41 cells(or 101 cells,depending on theresolution, 5kb or 1kb) long array, with count of looping to promoter.
 #promoter is 101th and 500kb upstream is [1-100] 500kb downstream is [102-201]. 0 is reads that are >100kb upstream; 202 is >100kb downstream.
-# python ~/HiC-Analysis/bed_file_processing/promoter_looping_map_500k.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed ${NAME[$i]}_joint_SPloops_1k.dedup.bed &
-
+# ~/HiC-Analysis/bed_file_processing/promoter_looping_map_500k.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/joint_beds_SPloops/${NAME[$i]}_joint_SPloops_1k.dedup.bed &
 import pickle
 import os,sys,re
-import numpy as np
+import matplotlib
+matplotlib.use('Agg') 
 import matplotlib.pyplot as plt
+import numpy as np
 import matplotlib.image as mpimg
-from scipy import ndimage
 #BED file of mapped reads
 bedfile = open(sys.argv[1])
 bed = open(sys.argv[2])
@@ -43,13 +43,14 @@ for line in bed:
 					if bin <= 201:
 						promoters[species][promoter][bin] += 1
 					else:
-						promoters[species][promoter][202] +=1
+						promoters[species][promoter][202] += 1
 				else:
 					bin = 101 + int(dis/res) - 1
 					if bin >= 0:
 						promoters[species][promoter][bin] += 1
 					else:
 						promoters[species][promoter][0] += 1
+				break
 
 			elif start < fcoord2 < end or start < rcoord2 < end:
 				mid = (fcoord1+rcoord1)/2
@@ -59,13 +60,14 @@ for line in bed:
 					if bin <= 201:
 						promoters[species][promoter][bin] += 1
 					else:
-						promoters[species][promoter][202] +=1
+						promoters[species][promoter][202] += 1
 				else:
 					bin = 101 + int(dis/res) - 1
 					if bin >= 0:
 						promoters[species][promoter][bin] += 1
 					else:
-						promoters[species][promoter][0] +=1
+						promoters[species][promoter][0] += 1
+				break
 
 fname = prefix + '_joint_SPloops_1k.pickle'
 with open(fname,'wb') as handle:
@@ -76,8 +78,16 @@ matrix = np.zeros(shape=(len(prom_list),num),dtype=float)
 for i in range(len(prom_list)):
 	chrom, start, end = prom_list[i][0], prom_list[i][1], prom_list[i][2]
 	matrix[i,] = promoters[chrom][(start,end)]
+# Start plot a figure
 figname = prefix + '_joint_SPloops_1k.pdf'
-plt.figure()
-plt.imshow(matrix,origin="lower",cmap=plt.get_cmap('YlOrRd'),interpolation="nearest",aspect='auto',vmin=0)
-plt.colorbar()
+figtitle = 'NA'+prefix
+fig = plt.figure()
+axes = plt.subplot(111)
+plt.imshow(log_matrix,origin="lower",cmap=plt.get_cmap('Reds'),interpolation="nearest",aspect='auto',vmin=0,vmax=8)
+plt.colorbar(label="Log(Count)")   
+axes.set_xticks([0,50,100,150,200])
+axes.set_xticklabels(["-500", "-250","0","250","500"])
+axes.set_yticks([])
+plt.xlabel('Interaction distance (kb)', fontsize=16)
+plt.title(figtitle,fontsize=20)
 plt.savefig(figname)
