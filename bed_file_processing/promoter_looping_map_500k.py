@@ -5,6 +5,10 @@
 
 import pickle
 import os,sys,re
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+from scipy import ndimage
 #BED file of mapped reads
 bedfile = open(sys.argv[1])
 bed = open(sys.argv[2])
