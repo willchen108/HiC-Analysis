@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 #Create by Will Chen @ 2016.05.25
 # This file is used to create promoter centered loop counts plot. Each promoter has a 41 cells(or 101 cells,depending on theresolution, 5kb or 1kb) long array, with count of looping to promoter.
 #promoter is 101th and 500kb upstream is [1-100] 500kb downstream is [102-201]. 0 is reads that are >100kb upstream; 202 is >100kb downstream.
