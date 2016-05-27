@@ -1,8 +1,9 @@
+#!/usr/bin/python
+
 #Create by Will Chen @ 2016.05.25
 # This file is used to create promoter centered loop counts plot. Each promoter has a 41 cells(or 101 cells,depending on theresolution, 5kb or 1kb) long array, with count of looping to promoter.
 #promoter is 101th and 500kb upstream is [1-100] 500kb downstream is [102-201]. 0 is reads that are >100kb upstream; 202 is >100kb downstream.
 # ~/HiC-Analysis/bed_file_processing/promoter_looping_map_500k.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/joint_beds_SPloops/${NAME[$i]}_joint_SPloops_1k.dedup.bed &
-#!/usr/bin/env python
 import pickle
 import os,sys,re
 import matplotlib
