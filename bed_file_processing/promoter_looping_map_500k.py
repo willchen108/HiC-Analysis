@@ -9,7 +9,6 @@ import os,sys,re
 #import matplotlib.pyplot as plt
 import numpy as np
 #import matplotlib.image as mpimg
-#BED file of mapped reads
 bedfile = open(sys.argv[1])
 bed = open(sys.argv[2])
 prefix = sys.argv[2].split('_')[0]
