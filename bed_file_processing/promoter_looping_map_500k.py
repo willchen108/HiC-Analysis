@@ -4,11 +4,11 @@
 # ~/HiC-Analysis/bed_file_processing/promoter_looping_map_500k.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/joint_beds_SPloops/${NAME[$i]}_joint_SPloops_1k.dedup.bed &
 import pickle
 import os,sys,re
-#import matplotlib
-#matplotlib.use('Agg') 
-#import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg') 
+import matplotlib.pyplot as plt
 import numpy as np
-#import matplotlib.image as mpimg
+import matplotlib.image as mpimg
 
 bedfile = open(sys.argv[1])
 bed = open(sys.argv[2])

@@ -1,10 +1,13 @@
 import pickle
 import os,sys,re
+import matplotlib
+matplotlib.use('Agg') 
+import matplotlib.pyplot as plt
 import numpy as np
-
-bedfile = open(sys.argv[1])
-bed = open(sys.argv[2])
-prefix = sys.argv[2].split('_')[0]
+import matplotlib.image as mpimg
+bedfile = open('/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed')
+bed = open('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/joint_beds_SPloops/12874_joint_SPloops_1k.dedup.bed')
+prefix = '12874'
 #Just a list with different types of ligation junctions
 res = 5000
 num = int(1000000/res) + 3
@@ -42,8 +45,6 @@ for line in bed:
 						promoters[species][promoter][bin] += 1
 					else:
 						promoters[species][promoter][0] += 1
-				break
-
 			elif start < fcoord2 < end or start < rcoord2 < end:
 				mid = (fcoord1+rcoord1)/2
 				dis = mid - start
@@ -59,7 +60,6 @@ for line in bed:
 						promoters[species][promoter][bin] += 1
 					else:
 						promoters[species][promoter][0] += 1
-				break
 
 fname = prefix + '_joint_SPloops_1k.pickle'
 with open(fname,'wb') as handle:
@@ -70,3 +70,18 @@ matrix = np.zeros(shape=(len(prom_list),num),dtype=float)
 for i in range(len(prom_list)):
 	chrom, start, end = prom_list[i][0], prom_list[i][1], prom_list[i][2]
 	matrix[i,] = promoters[chrom][(start,end)]
+
+log_matrix = np.log(matrix+1)
+# Start plot a figure
+figname = prefix + '_joint_SPloops_1k.pdf'
+figtitle = 'NA'+prefix
+fig = plt.figure()
+axes = plt.subplot(111)
+plt.imshow(log_matrix,origin="lower",cmap=plt.get_cmap('Reds'),interpolation="nearest",aspect='auto',vmin=0,vmax=8)
+plt.colorbar(label="Log(Count)")   
+axes.set_xticks([0,50,100,150,200])
+axes.set_xticklabels(["-500", "-250","0","250","500"])
+axes.set_yticks([])
+plt.xlabel('Interaction distance (kb)', fontsize=16)
+plt.title(figtitle,fontsize=20)
+plt.savefig(figname)

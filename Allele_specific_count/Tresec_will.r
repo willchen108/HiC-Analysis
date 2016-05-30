@@ -103,7 +103,7 @@ cuts<-cut(results$Joint_b,c(-Inf,-0.12188,0.12188,Inf))
 results$col<-rep('NS',dim(results)[1])
 results$col[intersect(which(results$final_Qvalue<0.05),which(results$Joint_b<0))]<-'sig_neg'
 results$col[intersect(which(results$final_Qvalue<0.05),which(results$Joint_b>0))]<-'sig_pos'
-pdf('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/WASP_remapped/effect_size_hist.pdf',width=7*1.25,height=7)
+pdf('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/WASP_remapped/effect_size_hist_2.pdf',width=7*1.25,height=7)
 ggplot(results,aes(x=Joint_b,fill=col)) +
   geom_histogram(binwidth=0.05) +
   scale_fill_brewer(palette="Set1") +
