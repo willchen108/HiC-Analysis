@@ -1,10 +1,12 @@
 #Create by Will Chen @ 2016.05.31
 #requires 10 cores and 10G
+#sh /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping_v2.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_paired_bams 1 10847 &
 #Used to run WASP_mapping pipeline
+# 
 projdir=$1
 i=$2
 NAME=$3
-cd $projdir
+cd /net/shendure/vol10/projects/DNaseHiC.eQTLs/data
 mkdir -p WASP/$i
 #Step 2 
 cd WASP/$i
