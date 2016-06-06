@@ -1,19 +1,45 @@
-results = read.delim('/Users/Will/Desktop/AScount/AScount_eQTL_promoter_remapped_052616_eqtl.txt', header=T)
-data <- read.delim('/Users/Will/Desktop/AScount_eQTL_promoter_remapped.sorted.csv')
+results = read.delim('/Users/Will/Desktop/data/AScount/AScount_eQTL_promoter_remapped_052616_eqtl.txt', header=T)
+data <- read.delim('/Users/Will/Desktop/data//AScount/AScount_eQTL_promoter_remapped.sorted.csv')
+
+results = read.delim('/Users/Will/Desktop/data/AScount/AScount_SPloops_remapped_053016_eqtl.txt', header=T)
+data_total <- read.delim('/Users/Will/Desktop/data//AScount/AScount_SP_loops_sorted.csv')
+
 
 samp <- c(6,10,14,18,22,26,30,34,38)
-results_subset <- results[-which(is.na(results$Joint_b)),]
-results_subset2 <- results_subset[which(results_subset$Joint_b>0),]
-index2 <- which(results_subset2$final_Pvalue<1.0e-04)
-index <- which(results_subset$final_Pvalue<1.0e-05)
+trc  <- t(data_total[,samp+2])
+len <- dim(trc)[2]
+filtered <- c(1)
+for (i in 1:len) {
+  if (all(trc[,i]>10)=='FALSE'){
+    filtered <- append(filtered,i)
+  }
+}
+
+filtered <- filtered[-1]
+data <- data_total[-filtered,]
+trc  <- t(data[,samp+2])
+genos <- t(data[,samp+3])
+genos[which(genos=='0|0')] <- 0
+genos[which(genos=='1|0')] <- 3
+genos[which(genos=='0|1')] <- 1
+genos[which(genos=='1|1')] <- 4
+genos <- apply(genos,2,as.numeric)
+monomorphic<-apply(genos,2,function(x)length(unique(x)))
+data<-data[-which(monomorphic==1),]
+data <- data[-which(colSums(trc)<quantile(colSums(trc), 0.05)),]
+
+# results_subset <- results[-which(is.na(results$Joint_b)),]
+# results_subset2 <- results_subset[which(results_subset$Joint_b>0),]
+# index2 <- which(results_subset2$final_Pvalue<1.0e-04)
+# index <- which(results_subset$final_Pvalue<1.0e-05)
 
 results_final <- results_subset[index,]
 results_final2 <- results_subset2[index2,]
 
-index_t <- results_final2$GeneRowID
-data_subset2 <- data[index_t,]
+index_t <- results$GeneRowID
+data2 <- data[index_t,]
 #filter out sites with fewer than 65 reads across all samples
-trc  <- t(data_subset2[,samp+2])
+trc  <- t(data2[,samp+2])
 len <- dim(trc)[2]
 filtered <- c(1)
 for (i in 1:len) {
@@ -22,7 +48,7 @@ for (i in 1:len) {
   }
 }
 filtered <- filtered[-1]
-data_subset2 <- data_subset2[-filtered,]
+data_subset2 <- data2[-filtered,]
 trc  <- t(data_subset2[,samp+2])
 
 genos <- t(data_subset2[,samp+3])
@@ -31,8 +57,41 @@ genos[which(genos=='1|0')] <- 3
 genos[which(genos=='0|1')] <- 1
 genos[which(genos=='1|1')] <- 4
 genos <- apply(genos,2,as.numeric)
+
 genos <- data.frame(genos)
 trc <- data.frame(trc)
+
+# SPloop plot
+geno<-genos$X451
+geno[which(geno==4)]<-2
+geno[which(geno==3)]<-1
+jittergeno<-jitter(geno,0.5)
+jittergeno[which(geno==0)]<-jittergeno[which(geno==0)]+1
+jittergeno[which(geno==1)]<-jittergeno[which(geno==1)]+1
+jittergeno[which(geno==2)]<-jittergeno[which(geno==2)]+1
+ratio<- c(1,1.284588336,1.100746437,1.439222354,1.3094681,1.251398306,1.662814981,1.067659613,0.734573258)
+
+data_sub[1,]
+results[which(results$GeneRowID==3),]
+boxplot(trc$X451/ratio~geno,notch=F,xaxt='n',frame=F,outpch=NA,col="grey90",xlab='rs35004683',ylab='Mapped reads(Normalized)',ylim=c(0, 1000),cex.axis=1.25,cex.lab=1.25)
+points(jittergeno,as.numeric(trc$X451/ratio), col="grey25",pch=16,bty='n',cex=1.25)
+axis(1,at=c(1:3),labels=c('T/T (ref/ref) n = 3','T/C (ref/alt) n = 5','C/C (alt/alt) n = 1'),lty=0,cex.axis=1.25)
+text(3,700,expression(italic(P)*" = 6.31 x "*10^{-4}))
+
+
+ratio2 <- c(1.2845883, 1.3094681, 1.2513983, 1.6628150, 0.7345733)
+r <- data.frame(c(334,286,257,439,385))
+a <- data.frame(c(242,183,177,310,323))
+colnames(r) <- 'Ref(T)'
+colnames(a) <- 'Alt(C)'
+test <- cbind(r,a)
+Names <- colnames(ref)
+test <- test/ratio2
+test <- cbind(test,Names)
+test.m <-melt(test,id.vars='Names')
+library(ggplot2)
+ggplot(test.m, aes(Names, value)) +   
+  geom_bar(aes(fill = variable), position = "dodge", stat="identity")+ylab("Number of reads")+xlab("")
 
 #plot1
 geno<-genos$X3803

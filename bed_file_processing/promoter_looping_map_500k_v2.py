@@ -78,7 +78,7 @@ figtitle = 'NA'+prefix
 fig = plt.figure()
 axes = plt.subplot(111)
 plt.imshow(log_matrix,origin="lower",cmap=plt.get_cmap('Reds'),interpolation="nearest",aspect='auto',vmin=0,vmax=8)
-plt.colorbar(label="Log(Count)")   
+plt.colorbar(label="Log(Count)")
 axes.set_xticks([0,50,100,150,200])
 axes.set_xticklabels(["-500", "-250","0","250","500"])
 axes.set_yticks([])

@@ -13,9 +13,9 @@ for (i in 1:len) {
     }
 }
 filtered <- filtered[-1]
-data <- data_total[-filtered,]
+data <- data_total[-filtered,] # filter for each column
 trc  <- t(data[,samp+2])
-data <- data[-which(colSums(trc)<quantile(colSums(trc), 0.05)),]
+data <- data[-which(colSums(trc)<quantile(colSums(trc), 0.05)),] # filter for colsum
 
 #change genotypes to work with asSeq
 genos <- t(data[,samp+3])
@@ -49,7 +49,7 @@ eChr = mChr = as.integer(data[,1])
 ePos = mPos = as.integer(data[,2])
 
 # eQTL+promoters
-results = trecase(Y = trc, Y1 = ase1, Y2 = ase2, X = cov2, Z = genos, eChr = eChr, ePos = ePos, mChr = mChr, mPos = mPos, output.tag = 'AScount_eQTL_promoter_remapped_052616', p.cut = 1, local.only = TRUE, local.distance = 1, min.AS.sample = 2, min.n.het = 1)
+results = trecase(Y = trc, Y1 = ase1, Y2 = ase2, X = cov2, Z = genos, eChr = eChr, ePos = ePos, mChr = mChr, mPos = mPos, output.tag = 'AScount_eQTL_promoter_remapped_060616', p.cut = 1, local.only = TRUE, local.distance = 1, min.AS.sample = 2, min.n.het = 1)
 
 results = read.delim('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/WASP_remapped/AScount_eQTL_promoter_remapped_052616_eqtl.txt', header=T)
 #remove all p-values = NA
@@ -82,17 +82,40 @@ pdf('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/WASP_remapped/trec
 gg_qqplot(na.omit(results$final_Pvalue))
 dev.off()
 
-geno<-genos[,64291]
-geno[which(geno==4)]<-2
-jittergeno<-jitter(geno,0.5)
-jittergeno[which(geno==0)]<-jittergeno[which(geno==0)]+1
+
 
 pdf('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/WASP_remapped/sample_genotype_by_looping_event.pdf',width=7*1.25,height=7)
-boxplot(trc[,64291]~geno,notch=F,xaxt='n',frame=F,outpch=NA,col="grey90",xlab='rs7113108',ylab='mapped reads',cex.axis=1.25,cex.lab=1.25)
-points(jittergeno,as.numeric(trc[,64291]), col="grey25",pch=16,bty='n',cex=1.25)
-axis(1,at=c(1:2),labels=c('A/A (ref/ref) n = 3','G/G (alt/alt) n = 6'),lty=0,cex.axis=1.25)
-text(1,100,expression(italic(P)*" = 9.1 x "*10^{-79}))
-dev.off()
+# Plot box plot
+growIDs <- results$GeneRowID[which(results$final_Pvalue<1.0e-5)]
+for (i in 1:length(growIDs)) 
+  {
+  growID <- growIDs[i] 
+  geno<-genos[,growID]
+  geno[which(geno==4)]<-2
+  geno[which(geno==3)]<-1
+  jittergeno<-jitter(geno,0.5)
+  jittergeno[which(geno==0)]<-jittergeno[which(geno==0)]+1
+  jittergeno[which(geno==1)]<-jittergeno[which(geno==1)]+1
+  jittergeno[which(geno==2)]<-jittergeno[which(geno==2)]+1
+  ratio<- c(1,1.284588336,1.100746437,1.439222354,1.3094681,1.251398306,1.662814981,1.067659613,0.734573258)
+
+  data[growID,]
+  data[growID,3]
+  ref <- data[growID,4]
+  alt <- data[growID,5]
+  results[which(results$GeneRowID==growID),]
+  cmax <- max(trc[,growID]/ratio)
+  ylim <- 10^floor(log10(cmax)) * (round(cmax/10^floor(log10(cmax)))+1)
+  x1 <- (trc[,growID]/ratio)[which(geno==0)]
+  x2 <- (trc[,growID]/ratio)[which(geno==1)]
+  x3 <- (trc[,growID]/ratio)[which(geno==2)]
+  boxplot(x1,x2,x3,notch=F,xaxt='n',frame=F,outpch=NA,col="grey90",xlab=data[growID,3],ylab='Mapped reads(Normalized)',ylim=c(0, ylim),cex.axis=1.25,cex.lab=1.25)
+  points(jittergeno,as.numeric(trc[,growID]/ratio), col="grey25",pch=16,bty='n',cex=1.25)
+  axis(1,at=c(1:3),labels=c(paste0(ref,"/",ref,"(ref/ref) n = ",toString(sum(geno==0))),paste0(ref,"/",alt,"(ref/alt) n = ",toString(sum(geno==1))),paste0(alt,"/",alt,"(alt/alt) n = ",toString(sum(geno==2)))),lty=0,cex.axis=1.25)
+  pvalue <- toString(results[which(results$GeneRowID==growID),][20])
+  text(1,10,paste("P = ",pvalue))
+}
+
 
 pdf('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/WASP_remapped/effect_size_hist.pdf',width=7*1.25,height=7)
 cuts<-cut(results$Joint_b,c(-Inf,-0.12188,0.12188,Inf))
