@@ -85,8 +85,10 @@ dev.off()
 
 
 pdf('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/WASP_remapped/sample_genotype_by_looping_event.pdf',width=7*1.25,height=7)
+
 # Plot box plot
 growIDs <- results$GeneRowID[which(results$final_Pvalue<1.0e-5)]
+projdirs <- '/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/WASP_remapped/box_plot/'
 for (i in 1:length(growIDs)) 
   {
   growID <- growIDs[i] 
@@ -100,7 +102,6 @@ for (i in 1:length(growIDs))
   ratio<- c(1,1.284588336,1.100746437,1.439222354,1.3094681,1.251398306,1.662814981,1.067659613,0.734573258)
 
   data[growID,]
-  data[growID,3]
   ref <- data[growID,4]
   alt <- data[growID,5]
   results[which(results$GeneRowID==growID),]
@@ -109,11 +110,12 @@ for (i in 1:length(growIDs))
   x1 <- (trc[,growID]/ratio)[which(geno==0)]
   x2 <- (trc[,growID]/ratio)[which(geno==1)]
   x3 <- (trc[,growID]/ratio)[which(geno==2)]
+  pdf(paste0(projdirs,data[growID,3],".pdf"),width=7*1.25,height=7)
   boxplot(x1,x2,x3,notch=F,xaxt='n',frame=F,outpch=NA,col="grey90",xlab=data[growID,3],ylab='Mapped reads(Normalized)',ylim=c(0, ylim),cex.axis=1.25,cex.lab=1.25)
   points(jittergeno,as.numeric(trc[,growID]/ratio), col="grey25",pch=16,bty='n',cex=1.25)
   axis(1,at=c(1:3),labels=c(paste0(ref,"/",ref,"(ref/ref) n = ",toString(sum(geno==0))),paste0(ref,"/",alt,"(ref/alt) n = ",toString(sum(geno==1))),paste0(alt,"/",alt,"(alt/alt) n = ",toString(sum(geno==2)))),lty=0,cex.axis=1.25)
   pvalue <- toString(results[which(results$GeneRowID==growID),][20])
-  text(1,10,paste("P = ",pvalue))
+  text(1,10,paste0("P = ",pvalue))
 }
 
 
