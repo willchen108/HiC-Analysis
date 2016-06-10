@@ -1,8 +1,8 @@
 #Create by Will Chen @ 2016.05.24
 #requires 10 cores and 10G
 #Used to run WASP_mapping pipeline
-#usage sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping_bulk.sh promoters
-# 	or  sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping_bulk.sh snps
+#usage sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping_bulk_v2.sh
+# 	or  sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping_bulk.sh
 
 NAME[1]=10847
 NAME[2]=12814

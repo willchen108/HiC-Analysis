@@ -51,7 +51,7 @@ ePos = mPos = as.integer(data[,2])
 # eQTL+promoters
 results = trecase(Y = trc, Y1 = ase1, Y2 = ase2, X = cov2, Z = genos, eChr = eChr, ePos = ePos, mChr = mChr, mPos = mPos, output.tag = 'AScount_eQTL_promoter_remapped_060616', p.cut = 1, local.only = TRUE, local.distance = 1, min.AS.sample = 2, min.n.het = 1)
 
-results = read.delim('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/WASP_remapped/AScount_eQTL_promoter_remapped_052616_eqtl.txt', header=T)
+results = read.delim('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/WASP_remapped/AScount_eQTL_promoter_remapped_060616_eqtl.txt', header=T)
 #remove all p-values = NA
 results <- results[-which(is.na(x=results$final_Pvalue)),]
 results_ase <- results[-which(is.na(x=results$ASE_Pvalue)),]
@@ -87,7 +87,7 @@ dev.off()
 pdf('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/WASP_remapped/sample_genotype_by_looping_event.pdf',width=7*1.25,height=7)
 
 # Plot box plot
-growIDs <- results$GeneRowID[which(results$final_Pvalue<1.0e-5)]
+growIDs <- results$GeneRowID[which(results$final_Pvalue<1.0e-15)]
 projdirs <- '/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/WASP_remapped/box_plot/'
 for (i in 1:length(growIDs)) 
   {
@@ -116,6 +116,7 @@ for (i in 1:length(growIDs))
   axis(1,at=c(1:3),labels=c(paste0(ref,"/",ref,"(ref/ref) n = ",toString(sum(geno==0))),paste0(ref,"/",alt,"(ref/alt) n = ",toString(sum(geno==1))),paste0(alt,"/",alt,"(alt/alt) n = ",toString(sum(geno==2)))),lty=0,cex.axis=1.25)
   pvalue <- toString(results[which(results$GeneRowID==growID),][20])
   text(1,10,paste0("P = ",pvalue))
+  dev.off()
 }
 
 
