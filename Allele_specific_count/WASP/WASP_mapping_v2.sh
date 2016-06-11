@@ -39,8 +39,8 @@ samtools sort -n -o $projdir/WASP/$i/${NAME}_snps.wasp.sorted.bam $projdir/WASP/
 wait
 
 #Sort for GATK
-samtools sort -o $projdir/WASP/$i/${NAME}_promoters.wasp.sorted.bam $projdir/WASP/$i/${NAME}_promoters.wasp.chr.bam &
-samtools sort -o $projdir/WASP/$i/${NAME}_snps.wasp.sorted.bam $projdir/WASP/$i/${NAME}_snps.wasp.chr.bam&
+samtools sort -o $projdir/WASP/$i/${NAME}_promoters.wasp.sorted.chr.bam $projdir/WASP/$i/${NAME}_promoters.wasp.bam &
+samtools sort -o $projdir/WASP/$i/${NAME}_snps.wasp.sorted.chr.bam $projdir/WASP/$i/${NAME}_snps.wasp.bam&
 wait
 
 samtools index ${NAME}_promoters.wasp.sorted.sort.bam
