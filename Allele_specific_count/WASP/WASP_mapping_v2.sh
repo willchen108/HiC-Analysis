@@ -43,8 +43,8 @@ samtools sort -o $projdir/WASP/$i/${NAME}_promoters.wasp.sorted.chr.bam $projdir
 samtools sort -o $projdir/WASP/$i/${NAME}_snps.wasp.sorted.chr.bam $projdir/WASP/$i/${NAME}_snps.wasp.bam&
 wait
 
-samtools index ${NAME}_promoters.wasp.sorted.sort.bam
-samtools index ${NAME}_snps.wasp.sorted.sort.bam
+samtools index ${NAME}_promoters.wasp.sorted.chr.bam
+samtools index ${NAME}_snps.wasp.sorted.chr.bam
 
 mv ${NAME}_promoters.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.bam ../../
 mv ${NAME}_snps.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.bam ../../
