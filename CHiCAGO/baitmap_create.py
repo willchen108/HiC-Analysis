@@ -18,10 +18,10 @@ for line in baitfile:
 for line in rmap:
     if "start" not in line:
     	Chrom, start, end, ID = line.split()[0:4]
-    	start, end = int(start), int(end)
+    	start, end = int(float(start)), int(float(end))
     	if Chrom in bait:
     		for i in bait[Chrom]:
-    			if i[0] < int(start) < i[1] or i[0] < int(end) < i[1]:
+    			if i[0] < start < i[1] or i[0] < end < i[1]:
     				geneName = i[2]
     				print "%s\t%s\t%s\t%s\t%s" %  (Chrom, start, end, ID,geneName)
     				break
