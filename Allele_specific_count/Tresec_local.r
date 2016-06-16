@@ -1,11 +1,15 @@
-results = read.delim('/Users/Will/Desktop/data/AScount/AScount_eQTL_promoter_remapped_052616_eqtl.txt', header=T)
-data <- read.delim('/Users/Will/Desktop/data//AScount/AScount_eQTL_promoter_remapped.sorted.csv')
+results = read.delim('/Users/Will/Desktop/data/AScount/AScount_eQTL_promoter_remapped_060616_eqtl.txt', header=T)
+data <- read.delim('/Users/Will/Desktop/data/AScount/AScount_eQTLonly_realigned_dedup_wasp_sorted_20160614.csv')
 
 results = read.delim('/Users/Will/Desktop/data/AScount/AScount_SPloops_remapped_053016_eqtl.txt', header=T)
 data_total <- read.delim('/Users/Will/Desktop/data//AScount/AScount_SP_loops_sorted.csv')
 
-
 samp <- c(6,10,14,18,22,26,30,34,38)
+
+trc <- t(data[,samp+2])
+readsums <- apply(trc,2,sum)
+data<-data[-which(readsums<quantile(readsums,0.05)),]
+
 trc  <- t(data_total[,samp+2])
 len <- dim(trc)[2]
 filtered <- c(1)
@@ -16,50 +20,61 @@ for (i in 1:len) {
 }
 
 filtered <- filtered[-1]
-data <- data_total[-filtered,]
-trc  <- t(data[,samp+2])
+
+#change genotypes to work with asSeq
 genos <- t(data[,samp+3])
 genos[which(genos=='0|0')] <- 0
 genos[which(genos=='1|0')] <- 3
 genos[which(genos=='0|1')] <- 1
 genos[which(genos=='1|1')] <- 4
 genos <- apply(genos,2,as.numeric)
+
+#eliminate SNPs that are monomorphic across these nine individuals
 monomorphic<-apply(genos,2,function(x)length(unique(x)))
 data<-data[-which(monomorphic==1),]
-data <- data[-which(colSums(trc)<quantile(colSums(trc), 0.05)),]
 
-# results_subset <- results[-which(is.na(results$Joint_b)),]
-# results_subset2 <- results_subset[which(results_subset$Joint_b>0),]
-# index2 <- which(results_subset2$final_Pvalue<1.0e-04)
-# index <- which(results_subset$final_Pvalue<1.0e-05)
 
-results_final <- results_subset[index,]
-results_final2 <- results_subset2[index2,]
-
-index_t <- results$GeneRowID
-data2 <- data[index_t,]
-#filter out sites with fewer than 65 reads across all samples
-trc  <- t(data2[,samp+2])
-len <- dim(trc)[2]
-filtered <- c(1)
-for (i in 1:len) {
-  if (all(trc[,i]==0 | trc[,i]>10)=='FALSE'){
-    filtered <- append(filtered,i)
-  }
-}
-filtered <- filtered[-1]
-data_subset2 <- data2[-filtered,]
-trc  <- t(data_subset2[,samp+2])
-
-genos <- t(data_subset2[,samp+3])
+#create objects for trecase
+trc <- t(data[,samp+2])
+ase1 <- t(data[,samp])
+ase2 <- t(data[,samp+1])
+genos <- t(data[,samp+3])
 genos[which(genos=='0|0')] <- 0
 genos[which(genos=='1|0')] <- 3
 genos[which(genos=='0|1')] <- 1
 genos[which(genos=='1|1')] <- 4
 genos <- apply(genos,2,as.numeric)
 
-genos <- data.frame(genos)
-trc <- data.frame(trc)
+
+results <- results[-which(is.na(x=results$final_Pvalue)),]
+results_ase <- results[-which(is.na(x=results$ASE_Pvalue)),]
+require(qvalue)
+results$final_Qvalue<-qvalue(results$final_Pvalue)$qvalues
+results_ase$ASE_Qvalue<-qvalue(results_ase$ASE_Pvalue)$qvalues
+
+gg_qqplot = function(xs, ci=0.95) {
+  N = length(xs)
+  df = data.frame(observed=-log10(sort(xs)),
+                  expected=-log10(1:N / N),
+                  cupper=-log10(qbeta(ci,     1:N, N - 1:N + 1)),
+                  clower=-log10(qbeta(1 - ci, 1:N, N - 1:N + 1)))
+  log10Pe = expression(paste("Expected -log"[10], plain(P)))
+  log10Po = expression(paste("Observed -log"[10], plain(P)))
+  ggplot(df) +
+    geom_point(aes(expected, observed), shape=1, size=3) +
+    geom_abline(intercept=0, slope=1, alpha=0.5) +
+    geom_line(aes(expected, cupper), linetype=2) +
+    geom_line(aes(expected, clower), linetype=2) +
+    xlab(log10Pe) +
+    ylab(log10Po) +
+    theme_bw(base_size = 20)
+}
+
+require(ggplot2)
+
+gg_qqplot(na.omit(results_ase$final_Pvalue))
+
+
 
 # SPloop plot
 geno<-genos$X451

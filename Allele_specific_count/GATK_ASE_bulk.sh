@@ -2,8 +2,10 @@
 #requires 10 cores and 5G
 #usage sh ~/HiC-Analysis/Allele_specific_count/GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters eQTL_remapped
 # 	or sh ~/HiC-Analysis/Allele_specific_count/GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters promoters_remapped
-# /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_paired_bams/WASP snps.wasp.sorted.RG.chr snps_realigned_dedup_wasp_20160613
-# /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_paired_bams/WASP promoters.wasp.sorted.chr.RG promoters_realigned_dedup_wasp_20160613
+# sh ~/HiC-Analysis/Allele_specific_count/GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_paired_bams/WASP snps.wasp.sorted.chr.RG snps_realigned_dedup_wasp_20160614
+# sh ~/HiC-Analysis/Allele_specific_count/GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_paired_bams/WASP promoters.wasp.sorted.chr.RG promoters_realigned_dedup_wasp_20160614
+
+## Added -U ALLOW_N_CIGAR_READS to allow this command line to work with newer GATK versions which check for N in CIGAR strings. Not sure if this is the best way to handle this; there are two options, according to the below error message which I got when I ran GATK without this:
 NAME[1]=10847
 NAME[2]=12814
 NAME[3]=12878

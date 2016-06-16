@@ -1,5 +1,7 @@
 library(asSeq)
 data_total <- read.delim('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/WASP_remapped/AScount_eQTL_promoter_remapped.sorted.csv',header=T)
+
+data_total <- read.delim('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/realigned_wasp_remapped/AScount_eQTLonly_realigned_dedup_wasp_sorted_20160614.csv',header=T)
 cov  <- read.csv('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/seq_coverage.csv',header=T)
 samp <- c(6,10,14,18,22,26,30,34,38)
 
