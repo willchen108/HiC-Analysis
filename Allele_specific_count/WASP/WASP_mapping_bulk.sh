@@ -18,5 +18,5 @@ workdir=$1
 suffix=$2
 for i in {1..10}
 do 
-sh /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping_v2.sh $workdir/$i ${NAME[$i]} $suffix &
+sh /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh $workdir/$i ${NAME[$i]} $suffix &
 done
