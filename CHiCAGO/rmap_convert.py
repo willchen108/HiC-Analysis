@@ -6,5 +6,8 @@ print "%s\t%s\t%s\t%s" % \
     ('chr', 'start', 'end', 'fragmentID')
 for line in rmap:
     if "start" not in line:
-        Chrom, s1, s2, start, end, ID = line.split()[0:6]
+        if 'hs37d5' in line:
+            Chrom, start, end, ID = line.split()[0:4]
+        else:
+            Chrom, s1, s2, start, end, ID = line.split()[0:6]
         print "%s\t%s\t%s\t%s" %  (Chrom, start, end, ID)
