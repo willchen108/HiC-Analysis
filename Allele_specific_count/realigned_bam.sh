@@ -42,4 +42,4 @@ RGSM=20 \
 VALIDATION_STRINGENCY=SILENT
 
 # WASP
-sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters ${NAME[$i]} realigned_merged.sorted.dedup.RG
+sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh $workdir ${NAME[$i]} realigned_merged.sorted.dedup.RG

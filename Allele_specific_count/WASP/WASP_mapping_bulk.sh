@@ -14,8 +14,9 @@ NAME[7]=12875
 NAME[8]=12872
 NAME[9]=12873
 NAME[10]=12874
-workdir=$i
+workdir=$1
+suffix=$2
 for i in {1..10}
 do 
-sh /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping_v2.sh $workdir $i ${NAME[$i]} &
+sh /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping_v2.sh $workdir/$i ${NAME[$i]} $suffix &
 done
