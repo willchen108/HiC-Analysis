@@ -14,6 +14,7 @@ NAME[9]=12873
 NAME[10]=12874
 
 workdir=$1
+i=$2
 
 # Merge 2 bam files
 samtools merge $workdir/${NAME[$i]}_realigned_merged.bam $workdir/${NAME[$i]}_S${i}_R1_001.fastq.bwam.bam $workdir/${NAME[$i]}_S${i}_R2_001.fastq.bwam.bam 

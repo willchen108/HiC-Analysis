@@ -5,5 +5,5 @@
 workdir=$1
 for i in {1..10}
 do 
-sh ~/HiC-Analysis/Allele_specific_count/realigned_bam.sh $workdir/$i
+sh ~/HiC-Analysis/Allele_specific_count/realigned_bam.sh $workdir/$i $i
 done
