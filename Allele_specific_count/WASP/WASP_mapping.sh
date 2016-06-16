@@ -6,18 +6,19 @@
 
 projdir=$1
 NAME=$2
+suffix=$3
 cd $projdir
 
 #Step 2 
-python ~/tools/WASP/mapping/find_intersecting_snps.py ${NAME}_merged_RG.bam /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/SNPlist_wasp/
+python ~/tools/WASP/mapping/find_intersecting_snps.py $projdir/${NAME}_$suffix.bam /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/SNPlist_wasp/
 
 #Step 3
-bwa mem /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs37d5/hs37d5.fa ${NAME}_merged_RG.remap.fq.gz > ${NAME}_merged_RG.remapped.sam
-samtools view -bS ${NAME}_merged_RG.remapped.sam > ${NAME}_merged_RG.remapped.bam
+bwa mem /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs37d5/hs37d5.fa $projdir/${NAME}_$suffix.remap.fq.gz | samtools view -bS > $projdir/${NAME}_$suffix.remapped.bam
+
 
 #Step 4
-python ~/tools/WASP/mapping/filter_remapped_reads.py ${NAME}_merged_RG.to.remap.bam ${NAME}_merged_RG.remapped.bam ${NAME}_merged_RG.remap.keep.bam ${NAME}_merged_RG.to.remap.num.gz 
+python ~/tools/WASP/mapping/filter_remapped_reads.py $projdir/${NAME}_$suffix.to.remap.bam $projdir/${NAME}_$suffix.remapped.bam ${NAME}_$suffix.remap.keep.bam $projdir/${NAME}_$suffix.to.remap.num.gz 
 
-samtools merge ${NAME}.wasp.bam ${NAME}_merged_RG.keep.bam ${NAME}_merged_RG.remap.keep.bam 
-samtools sort -o ${NAME}.wasp.sorted.bam ${NAME}.wasp.bam 
-samtools index ${NAME}.wasp.sorted.bam
+samtools merge $projdir/${NAME}.realigned.wasp.bam $projdir/${NAME}_$suffix.keep.bam $projdir/${NAME}_$suffix.remap.keep.bam 
+samtools sort -o $projdir/${NAME}.realigned.wasp.sorted.bam $projdir/${NAME}.realigned.wasp.bam
+samtools index $projdir/${NAME}.realigned.wasp.sorted.bam
