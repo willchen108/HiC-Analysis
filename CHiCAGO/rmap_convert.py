@@ -5,6 +5,6 @@ rmap = open('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/Dnase_map_hs37d5.r
 print "%s\t%s\t%s\t%s" % \
     ('chr', 'start', 'end', 'fragmentID')
 for line in rmap:
-    if "chr" not in line:
+    if "start" not in line:
         Chrom, s1, s2, start, end, ID = line.split()[0:6]
         print "%s\t%s\t%s\t%s" %  (Chrom, start, end, ID)
