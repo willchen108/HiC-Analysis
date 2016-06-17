@@ -17,9 +17,9 @@ workdir=$1
 i=$2
 
 # Merge 2 bam files
-samtools merge $workdir/${NAME[$i]}_realigned_merged.bam $workdir/${NAME[$i]}_S${i}_R1_001.fastq.bwam.bam $workdir/${NAME[$i]}_S${i}_R2_001.fastq.bwam.bam 
+#samtools merge $workdir/${NAME[$i]}_realigned_merged.bam $workdir/${NAME[$i]}_S${i}_R1_001.fastq.bwam.bam $workdir/${NAME[$i]}_S${i}_R2_001.fastq.bwam.bam 
 # sort
-samtools sort -o $workdir/${NAME[$i]}_realigned_merged.sorted.bam $workdir/${NAME[$i]}_realigned_merged.bam
+#samtools sort -o $workdir/${NAME[$i]}_realigned_merged.sorted.bam $workdir/${NAME[$i]}_realigned_merged.bam
 
 # Deduplicate 
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar MarkDuplicates \
@@ -30,10 +30,13 @@ java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar M
       ASSUME_SORTED=true \
       M=$workdir/${NAME[$i]}_realigned_merged.sorted.dedup.txt
 
+# Sort again
+samtools sort -o $workdir/${NAME[$i]}_realigned_merged.sort.dedup.bam $workdir/${NAME[$i]}_realigned_merged.sorted.dedup.bam
+
 #Add Readgroup
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar AddOrReplaceReadGroups \
-I=$workdir/${NAME[$i]}_realigned_merged.sorted.dedup.bam \
-O=$workdir/${NAME[$i]}_realigned_merged.sorted.dedup.RG.bam  \
+I=$workdir/${NAME[$i]}_realigned_merged.sort.dedup.bam \
+O=$workdir/${NAME[$i]}_realigned_merged.sort.dedup.RG.bam  \
 RGID=NA${NAME[$i]} \
 RGLB=lib1 \
 RGPL=illumina \
@@ -42,4 +45,4 @@ RGSM=20 \
 VALIDATION_STRINGENCY=SILENT
 
 # WASP
-sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh $workdir ${NAME[$i]} realigned_merged.sorted.dedup.RG
+sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh $workdir ${NAME[$i]} realigned_merged.sort.dedup.RG
