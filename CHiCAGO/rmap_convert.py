@@ -12,4 +12,4 @@ for line in rmap:
         	continue 
         else:
             Chrom, start, end, ID = line.split()[0:4]            
-        print "%s\t%s\t%s\t%s" %  (Chrom, start, end, ID)
+        print "%s\t%s\t%s\t%s" %  (Chrom, int(float(start)), int(float(end)), int(float(ID)))
