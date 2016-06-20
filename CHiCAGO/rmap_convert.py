@@ -8,6 +8,8 @@ for line in rmap:
     if "start" not in line:
         if 'dna:' in line:
             Chrom, s1, s2, start, end, ID = line.split()[0:6]
+        elif 'MT' in line:
+        	continue 
         else:
             Chrom, start, end, ID = line.split()[0:4]            
         print "%s\t%s\t%s\t%s" %  (Chrom, start, end, ID)
