@@ -5,7 +5,6 @@ import os,sys,re
 rmap = open('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/Dnasemap_hs37d5.rmap')
 fname = '/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/'+ sys.argv[1]
 baitfile = open(fname)
-print "%s\t%s\t%s\t%s\t%s" % ('chr', 'start', 'end', 'fragmentID','geneName')
 bait = {}
 for line in baitfile:
 	Chrom ,start, end, ID = line.split()[0:4]
