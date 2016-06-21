@@ -30,7 +30,7 @@ bwa mem -M /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs
 wait
 
 #Step 4
-python ~/tools/WASP/mapping/filter_remapped_reads.py ${NAME}_promoters.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.sort.to.remap.bam ${NAME}_promoters.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.sort.remapped.bam ${NAME}_promoters.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.sort.remap.keep.bam ${NAME}_promoters.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.sort.to.remap.num.gz&
+python ~/tools/WASP/mapping/filter_remapped_reads.py ${NAME}_promoters.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.sort.to.remap.bam ${NAME}_promoters.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.sort.remapped.bam ${NAME}_promoters.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.sort.remap.keep.bam ${NAME}_promoters.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.sort.to.remap.num.gz &
 
 python ~/tools/WASP/mapping/filter_remapped_reads.py ${NAME}_snps.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.sort.to.remap.bam ${NAME}_snps.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.sort.remapped.bam ${NAME}_snps.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.sort.remap.keep.bam ${NAME}_snps.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.sort.to.remap.num.gz&
 wait
@@ -40,8 +40,8 @@ samtools merge ${NAME}_snps.wasp.bam ${NAME}_snps.fix.secondary_alignments_flagg
 wait
 
 #Sort for RNA-seq data
-samtools sort -n -o $projdir/WASP/$i/${NAME}_promoters.wasp.sorted.bam $projdir/WASP/$i/${NAME}_promoters.wasp.bam &
-samtools sort -n -o $projdir/WASP/$i/${NAME}_snps.wasp.sorted.bam $projdir/WASP/$i/${NAME}_snps.wasp.bam&
+samtools sort -n -o $projdir/WASP/$i/${NAME}_promoters.wasp.paired.bam $projdir/WASP/$i/${NAME}_promoters.wasp.bam &
+samtools sort -n -o $projdir/WASP/$i/${NAME}_snps.wasp.paired.bam $projdir/WASP/$i/${NAME}_snps.wasp.bam&
 wait
 
 #Sort for GATK
@@ -49,8 +49,30 @@ samtools sort -o $projdir/WASP/$i/${NAME}_promoters.wasp.sorted.chr.bam $projdir
 samtools sort -o $projdir/WASP/$i/${NAME}_snps.wasp.sorted.chr.bam $projdir/WASP/$i/${NAME}_snps.wasp.bam&
 wait
 
-samtools index ${NAME}_promoters.wasp.sorted.chr.bam &
-samtools index ${NAME}_snps.wasp.sorted.chr.bam &
+
+java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar AddOrReplaceReadGroups \
+I=$workdir/${NAME}_promoters.wasp.sorted.chr.bam \
+O=$workdir/${NAME}_promoters.wasp.sorted.chr.RG.bam  \
+RGID=NA${NAME} \
+RGLB=lib1 \
+RGPL=illumina \
+RGPU=unit1 \
+RGSM=20 \
+VALIDATION_STRINGENCY=SILENT &
+
+java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar AddOrReplaceReadGroups \
+I=$workdir/${NAME}_snps.wasp.sorted.chr.bam \
+O=$workdir/${NAME}_snps.wasp.sorted.chr.RG.bam  \
+RGID=NA${NAME} \
+RGLB=lib1 \
+RGPL=illumina \
+RGPU=unit1 \
+RGSM=20 \
+VALIDATION_STRINGENCY=SILENT &
+wait
+
+samtools index ${NAME}_promoters.wasp.sorted.chr.RG.bam &
+samtools index ${NAME}_snps.wasp.sorted.chr.RG.bam &
 wait
 mv ${NAME}_promoters.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.bam ../../
 mv ${NAME}_snps.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.bam ../../
