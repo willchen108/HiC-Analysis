@@ -49,7 +49,7 @@ samtools sort -o $projdir/WASP/$i/${NAME}_promoters.wasp.sorted.chr.bam $projdir
 samtools sort -o $projdir/WASP/$i/${NAME}_snps.wasp.sorted.chr.bam $projdir/WASP/$i/${NAME}_snps.wasp.bam&
 wait
 
-
+# Add RG for GATK
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar AddOrReplaceReadGroups \
 I=$workdir/${NAME}_promoters.wasp.sorted.chr.bam \
 O=$workdir/${NAME}_promoters.wasp.sorted.chr.RG.bam  \
