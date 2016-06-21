@@ -12,7 +12,7 @@ NAME[7]=12875
 NAME[8]=12872
 NAME[9]=12873
 NAME[10]=12874
-projdir=$1
+projectdir=$1
 suffix_I=$2
 baitmap=$3
 for i in {1..10}
