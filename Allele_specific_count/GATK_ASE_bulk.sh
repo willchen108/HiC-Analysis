@@ -1,7 +1,5 @@
 #Create by Will Chen @ 2016.05.13
 #requires 10 cores and 5G
-#usage sh ~/HiC-Analysis/Allele_specific_count/GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters eQTL_remapped
-# 	or sh ~/HiC-Analysis/Allele_specific_count/GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters promoters_remapped
 # sh ~/HiC-Analysis/Allele_specific_count/GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_paired_bams/WASP snps.wasp.sorted.chr.RG snps_realigned_dedup_wasp_20160614
 # sh ~/HiC-Analysis/Allele_specific_count/GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_paired_bams/WASP promoters.wasp.sorted.chr.RG promoters_realigned_dedup_wasp_20160614
 
