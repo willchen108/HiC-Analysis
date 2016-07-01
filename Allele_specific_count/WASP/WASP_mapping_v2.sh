@@ -51,8 +51,8 @@ wait
 
 # Add RG for GATK
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar AddOrReplaceReadGroups \
-I=$workdir/${NAME}_promoters.wasp.sorted.chr.bam \
-O=$workdir/${NAME}_promoters.wasp.sorted.chr.RG.bam  \
+I=$projdir/${NAME}_promoters.wasp.sorted.chr.bam \
+O=$projdir/${NAME}_promoters.wasp.sorted.chr.RG.bam  \
 RGID=NA${NAME} \
 RGLB=lib1 \
 RGPL=illumina \
@@ -61,8 +61,8 @@ RGSM=20 \
 VALIDATION_STRINGENCY=SILENT &
 
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar AddOrReplaceReadGroups \
-I=$workdir/${NAME}_snps.wasp.sorted.chr.bam \
-O=$workdir/${NAME}_snps.wasp.sorted.chr.RG.bam  \
+I=$projdir/${NAME}_snps.wasp.sorted.chr.bam \
+O=$projdir/${NAME}_snps.wasp.sorted.chr.RG.bam  \
 RGID=NA${NAME} \
 RGLB=lib1 \
 RGPL=illumina \
@@ -71,8 +71,8 @@ RGSM=20 \
 VALIDATION_STRINGENCY=SILENT &
 wait
 
-samtools index ${NAME}_promoters.wasp.sorted.chr.RG.bam &
-samtools index ${NAME}_snps.wasp.sorted.chr.RG.bam &
+samtools index $projdir/WASP/$i/${NAME}_promoters.wasp.sorted.chr.RG.bam &
+samtools index $projdir/WASP/$i/${NAME}_snps.wasp.sorted.chr.RG.bam &
 wait
 mv ${NAME}_promoters.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.bam ../../
 mv ${NAME}_snps.fix.secondary_alignments_flagged_coordinate_sorted_dups_removed.bam ../../

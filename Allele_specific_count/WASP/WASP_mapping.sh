@@ -13,7 +13,7 @@ cd $projdir
 python ~/tools/WASP/mapping/find_intersecting_snps.py -s $projdir/${NAME}_$suffix.bam /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/SNPlist_wasp/
 
 #Step 3
-bwa mem /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs37d5/hs37d5.fa $projdir/${NAME}_$suffix.remap.fq.gz | samtools view -bS > $projdir/${NAME}_$suffix.remapped.bam
+bwa mem -M /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs37d5/hs37d5.fa $projdir/${NAME}_$suffix.remap.fq.gz | samtools view -bS > $projdir/${NAME}_$suffix.remapped.bam
 
 
 #Step 4
