@@ -23,6 +23,11 @@ i=$2
 suffix=$3
 destdir=$4
 
+# WASP
+sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh $workdir ${NAME[$i]} S${i}_R1_001.fastq.bwam &
+sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh $workdir ${NAME[$i]} S${i}_R2_001.fastq.bwam &
+wait
+
 # Merge 2 bam files and add pair flag
 r1=$workdir/${NAME[$i]}_S${i}_R1_001.fastq.bwam.bam
 r2=$workdir/${NAME[$i]}_S${i}_R2_001.fastq.bwam.bam 
@@ -53,5 +58,3 @@ RGPU=unit1 \
 RGSM=20 \
 VALIDATION_STRINGENCY=SILENT
 
-# WASP
-sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh $destdir ${NAME[$i]} ${suffix}.sorted.dedup.sort.RG

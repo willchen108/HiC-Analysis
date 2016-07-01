@@ -19,6 +19,10 @@ bwa mem -M /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs
 #Step 4
 python ~/tools/WASP/mapping/filter_remapped_reads.py $projdir/${NAME}_$suffix.to.remap.bam $projdir/${NAME}_$suffix.remapped.bam ${NAME}_$suffix.remap.keep.bam $projdir/${NAME}_$suffix.to.remap.num.gz 
 
-samtools merge $projdir/${NAME}.realigned.wasp.bam $projdir/${NAME}_$suffix.keep.bam $projdir/${NAME}_$suffix.remap.keep.bam 
-samtools sort -o $projdir/${NAME}.realigned.wasp.sorted.bam $projdir/${NAME}.realigned.wasp.bam
-samtools index $projdir/${NAME}.realigned.wasp.sorted.bam
+samtools merge $projdir/${NAME}_$suffix.wasp.bam $projdir/${NAME}_$suffix.keep.bam $projdir/${NAME}_$suffix.remap.keep.bam 
+#samtools sort -o $projdir/${NAME}.realigned.wasp.sorted.bam $projdir/${NAME}_$suffix.wasp.bam
+#samtools index $projdir/${NAME}.realigned.wasp.sorted.bam
+rm $projdir/${NAME}_$suffix.remap.fq.gz
+rm $projdir/${NAME}_$suffix.to.remap.num.gz 
+rm $projdir/${NAME}_$suffix.remapped.bam
+rm ${NAME}_$suffix.remap.keep.bam
