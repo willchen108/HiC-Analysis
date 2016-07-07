@@ -1,7 +1,7 @@
 #Create by Will Chen @ 2016.05.13
 #requires 10 cores and 5G
-# sh ~/HiC-Analysis/Allele_specific_count/GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_paired_bams/WASP snps.wasp.sorted.chr.RG snps_realigned_dedup_wasp_20160614
-# sh ~/HiC-Analysis/Allele_specific_count/GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_paired_bams/WASP promoters.wasp.sorted.chr.RG promoters_realigned_dedup_wasp_20160614
+# sh ~/HiC-Analysis/Allele_specific_count/GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will snps_properPairs_fixmate.sorted.dedup.sort.RG snps_properPairs_fixmate_20160706
+# sh ~/HiC-Analysis/Allele_specific_count/GATK_ASE_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will promoters_properPairs_fixmate.sorted.dedup.sort.RG promoters_properPairs_fixmate_20160706
 
 ## Added -U ALLOW_N_CIGAR_READS to allow this command line to work with newer GATK versions which check for N in CIGAR strings. Not sure if this is the best way to handle this; there are two options, according to the below error message which I got when I ran GATK without this:
 NAME[1]=10847

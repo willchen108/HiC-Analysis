@@ -62,3 +62,4 @@ RGPU=unit1 \
 RGSM=20 \
 VALIDATION_STRINGENCY=SILENT
 
+samtools index $destdir/${NAME[$i]}_${suffix}.sorted.dedup.sort.RG.bam
