@@ -22,5 +22,5 @@ workdir=$1
 suffix=$2
 for i in {1..10}
 do
-Rscript ~/HiC-Analysis/Plotting/prepPseudoPairs.r $workdir/$i ${NAME[$i]} $suffix &
+Rscript ~/HiC-Analysis/Plotting/prepPseudoPairs.r $workdir/$i/ ${NAME[$i]} $suffix &
 done
