@@ -1,7 +1,4 @@
 #Create by Will Chen @ 2016.06.16
-#requires 10 cores and 10G
-#usage 
-# workdir=
 #for i in {1..10}
 #do 
 #sh ~/HiC-Analysis/Allele_specific_count/realigned_bam.sh $workdir/$i $i promoter_properPair_fixmate /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will &
@@ -63,3 +60,11 @@ RGSM=20 \
 VALIDATION_STRINGENCY=SILENT
 
 samtools index $destdir/${NAME[$i]}_${suffix}.sorted.dedup.sort.RG.bam
+
+java -jar /net/gs/vol3/software/modules-sw/GATK/3.5/Linux/RHEL6/x86_64/GenomeAnalysisTK.jar \
+  -R /net/shendure/vol10/nobackup/shared/genomes/human_g1k_hs37d5/hs37d5.fa \
+  -T ASEReadCounter \
+  -o $destdir/${NAME[$i]}_${suffix}.csv \
+  -I $destdir/${NAME[$i]}_${suffix}.sorted.dedup.sort.RG.bam \
+  -sites /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/SNPs_release/eQTL_SNPs/Biallelic_eQTL_SNPs.vcf \
+  -U ALLOW_N_CIGAR_READS \

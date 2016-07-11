@@ -1,5 +1,7 @@
 library(asSeq)
 data_total <- read.delim('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/WASP_remapped/WASP_V3/AScount_eQTL+Promoters_realigned_dedup_wasp_sorted_20160621.csv',header=T)
+
+data_total <- read.delim('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/WASP/AScount_eQTL+Promoter_20160706.sorted.csv',header=T)
 cov  <- read.csv('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/seq_coverage.csv',header=T)
 samp <- c(6,10,14,18,22,26,30,34,38)
 
@@ -63,6 +65,13 @@ ePos = mPos = as.integer(data[,2])
 results = trecase(Y = trc, Y1 = ase1, Y2 = ase2, X = cov2, Z = genos, eChr = eChr, ePos = ePos, mChr = mChr, mPos = mPos, output.tag = 'AScount_eQTL+Promoter_realigned_060621', p.cut = 1, local.only = TRUE, local.distance = 1, min.AS.sample = 2, min.n.het = 1)
 
 results = trecase(Y = trc, Y1 = ase1, Y2 = ase2, X = cov2, Z = genos, eChr = eChr, ePos = ePos, mChr = mChr, mPos = mPos, output.tag = 'AScount_eQTL+Promoter_realigned_filtered_060622', p.cut = 1, local.only = TRUE, local.distance = 1, min.AS.sample = 2, min.n.het = 1)
+
+
+results = trecase(Y = trc, Y1 = ase1, Y2 = ase2, X = cov2, Z = genos, eChr = eChr, ePos = ePos, mChr = mChr, mPos = mPos, output.tag = 'AScount_eQTL_promoter_filtered_final_070816', p.cut = 1, local.only = TRUE, local.distance = 1, min.AS.sample = 2, min.n.het = 1)
+
+
+
+
 
 results = read.delim('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/AScount/WASP_remapped/WASP_V3/AScount_eQTL+Promoter_realigned_filtered_060622_eqtl.txt', header=T)
 
