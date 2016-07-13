@@ -7,16 +7,15 @@ import os,sys,re
 #BED file of mapped reads
 bedfile = open(sys.argv[1])
 bed = open(sys.argv[2])
-#Just a list with different types of ligation junctions
 
 promoters = {}
 for line in bedfile:
-	chrom, fd, rv = line.split()[0:3]
+	chrom, fwd, rev = line.split()[0:3]
 	if chrom in promoters:
-		promoters[chrom].append([int(fd),int(rv)])
+		promoters[chrom].append([int(fwd),int(rev)])
 	else:
 		promoters[chrom] = []
-		promoters[chrom].append([int(fd),int(rv)])
+		promoters[chrom].append([int(fwd),int(rev)])
  
 for line in bed:
 	split = line.split() #split BED file
