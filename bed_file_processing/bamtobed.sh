@@ -18,5 +18,5 @@ suffix=${2}_properPairs_fixmate.sorted.dedup.sort.RG.sortname
 for i in {1..10}
 do 
 projectdir=$workdir/$i
-bedtools bamtobed -bedpe -mate1 -i $projectdir/${NAME[$i]}_$suffix.bam > $projectdir/${NAME[$i]}.${2}.fixmate.bedpe
+bedtools bamtobed -bedpe -mate1 -i $projectdir/${NAME[$i]}_$suffix.bam > $projectdir/${NAME[$i]}.${2}.fixmate.bedpe & 
 done
