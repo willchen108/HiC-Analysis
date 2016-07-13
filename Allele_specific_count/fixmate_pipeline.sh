@@ -40,7 +40,7 @@ samtools sort -@ 10 -o $destdir/${NAME[$i]}_${suffix}.sorted.bam $destdir/${NAME
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar MarkDuplicates \
       VALIDATION_STRINGENCY=SILENT \
       I=$destdir/${NAME[$i]}_${suffix}.sorted.bam \
-      REMOVE_DUPLICATES=false \
+      REMOVE_DUPLICATES=true \
       O=$destdir/${NAME[$i]}_${suffix}.sorted.dedup.bam \
       ASSUME_SORTED=true \
       M=$destdir/${NAME[$i]}_${suffix}.sorted.dedup.txt

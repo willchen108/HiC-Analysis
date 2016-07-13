@@ -1,6 +1,6 @@
 #Create by Will Chen @ 2016.04.11
-#require 2 cores 12G memory.
-#USAGE: bed_partition_bulk.sh <workdirectory> example /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters/
+#Modified @ 2016.07.13
+#USAGE: bed_partition_bulk.sh <workdirectory> example /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will/
 #VARS
 
 NAME[1]=10847
@@ -17,7 +17,7 @@ workdir=$1
 for i in 1 2 3 4 5 6 7 8 9 10
 do 
 projectdir=$workdir/$i
-python /net/shendure/vol10/projects/DNaseHiC.eQTLs/scripts/Will/bed_partition_1k.py 1000 $projectdir/${NAME[$i]}_eQTL_SNPs.bed.deduped > $projectdir/${NAME[$i]}_1k.bed&
-python /net/shendure/vol10/projects/DNaseHiC.eQTLs/scripts/Will/bed_partition_1k.py 10000 $projectdir/${NAME[$i]}_eQTL_SNPs.bed.deduped > $projectdir/${NAME[$i]}_10k.bed&
+python ~/HiC-Analysis/bed_file_processing/bed_partition.py 3000 $projectdir/${NAME[$i]}_eQTL_SNPs.bed.deduped > $projectdir/${NAME[$i]}_3k.bed&
+python ~/HiC-Analysis/bed_file_processing/bed_partition.py 10000 $projectdir/${NAME[$i]}_eQTL_SNPs.bed.deduped > $projectdir/${NAME[$i]}_10k.bed&
 wait
 done
