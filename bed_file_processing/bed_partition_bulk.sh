@@ -1,6 +1,6 @@
 #Create by Will Chen @ 2016.04.11
 #Modified @ 2016.07.13
-#USAGE: bed_partition_bulk.sh <workdirectory> example /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will/
+#USAGE: sh ~/HiC-Analysis/bed_file_processing/bed_partition_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will/
 #VARS
 
 NAME[1]=10847
