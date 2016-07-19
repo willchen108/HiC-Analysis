@@ -33,6 +33,7 @@ wait
 r1=$workdir/${NAME[$i]}_S${i}_R1_001.fastq.bwam.sort.wasp.bam
 r2=$workdir/${NAME[$i]}_S${i}_R2_001.fastq.bwam.sort.wasp.bam 
 ( ~mkircher/bin/samtools view -H $r1; ~mkircher/bin/samtools view -X $r1 | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP1"$2; print }' ; ~mkircher/bin/samtools view -X $r2 | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP2"$2; print }' ) | ~mkircher/bin/samtools view -Su - | samtools sort -n -@ 10 - -T $workdir/${NAME[$i]}_test_snps | samtools fixmate -r -p - $destdir/${NAME[$i]}_${suffix}.bam
+
 # sort
 samtools sort -@ 10 -o $destdir/${NAME[$i]}_${suffix}.sorted.bam $destdir/${NAME[$i]}_${suffix}.bam
 
@@ -59,8 +60,10 @@ RGPU=unit1 \
 RGSM=20 \
 VALIDATION_STRINGENCY=SILENT
 
+# index
 samtools index $destdir/${NAME[$i]}_${suffix}.sorted.dedup.sort.RG.bam
 
+#GATK ASE count
 java -jar /net/gs/vol3/software/modules-sw/GATK/3.5/Linux/RHEL6/x86_64/GenomeAnalysisTK.jar \
   -R /net/shendure/vol10/nobackup/shared/genomes/human_g1k_hs37d5/hs37d5.fa \
   -T ASEReadCounter \
@@ -68,3 +71,19 @@ java -jar /net/gs/vol3/software/modules-sw/GATK/3.5/Linux/RHEL6/x86_64/GenomeAna
   -I $destdir/${NAME[$i]}_${suffix}.sorted.dedup.sort.RG.bam \
   -sites /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/SNPs_release/eQTL_SNPs/Biallelic_eQTL_SNPs.vcf \
   -U ALLOW_N_CIGAR_READS \
+  &
+
+#convert to h5 files
+Rscript ~/HiC-Analysis/Plotting/prepPseudoPairs.r $destdir/ ${NAME[$i]} ${suffix}.sorted.dedup.sort.RG &
+
+#convert to paired bed files
+bedtools bamtobed -bedpe -mate1 -i $destdir/${NAME[$i]}_${suffix}.sorted.dedup.sort.RG.bam > $projectdir/${NAME[$i]}_${suffix}.bedpe
+
+wait
+# subset intra 3k and 10k pairs
+python ~/HiC-Analysis/bed_file_processing/bed_partition.py 3000 $destdir/${NAME[$i]}_${suffix}.bedpe > $destdir/${NAME[$i]}.$suffix.intra3k.bed &
+python ~/HiC-Analysis/bed_file_processing/bed_partition.py 10000 $destdir/${NAME[$i]}_${suffix}.bedpe > $destdir/${NAME[$i]}.$suffix.intra10k.bed &
+
+# Subset SPloops
+python ~/HiC-Analysis/bed_file_processing/bed_subset_SPloop.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed $destdir/${NAME[$i]}.$suffix.intra3k.bed > $destdir/${NAME[$i]}.$suffix.intra3k.SPloop.bed &
+python ~/HiC-Analysis/bed_file_processing/bed_subset_SPloop.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed $destdir/${NAME[$i]}.$suffix.intra10k.bed > $destdir/${NAME[$i]}.$suffix.intra10k.SPloop.bed &

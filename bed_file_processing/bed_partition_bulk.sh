@@ -21,3 +21,4 @@ projectdir=$workdir/$i
 python ~/HiC-Analysis/bed_file_processing/bed_partition.py 3000 $projectdir/${NAME[$i]}.$suffix.bedpe > $projectdir/${NAME[$i]}.$suffix.intra3k.bed&
 python ~/HiC-Analysis/bed_file_processing/bed_partition.py 10000 $projectdir/${NAME[$i]}.$suffix.bedpe > $projectdir/${NAME[$i]}.$suffix.intra10k.bed&
 done
+
