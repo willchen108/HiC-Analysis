@@ -1,4 +1,7 @@
 #Create by Will Chen @ 2016.04.11, borrow from sort_strandedness_bulk.py
+# Usage /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_decouple+10.py $projectdir/${NAME[$i]}_k.bed > $workdir/${NAME[$i]}.snps.fixmate.intra3k.SPloop.decoupled.bed 
+
+
 import os,sys,re
 #BED file of mapped reads
 fhi = open(sys.argv[1])

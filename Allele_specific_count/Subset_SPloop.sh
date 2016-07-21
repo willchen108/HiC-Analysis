@@ -18,7 +18,7 @@ i=$2
 # Get the IDlist for parsing
 awk -v x=7 '{print $x}' $workdir/${NAME[$i]}.snps.fixmate.intra3k.SPloop.bed > $workdir/${NAME[$i]}.snps.fixmate.intra3k.SPloop.IDs.bed &
 # Decouple bedfiles for 1st subsetting
-python /net/shendure/vol10/projects/DNaseHiC.eQTLs/scripts/Will/decouple_bed.py $workdir/${NAME[$i]}.snps.fixmate.intra3k.SPloop.bed > $workdir/${NAME[$i]}.snps.fixmate.intra3k.SPloop.decoupled.bed 
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_decouple+10.py  $workdir/${NAME[$i]}.snps.fixmate.intra3k.SPloop.bed > $workdir/${NAME[$i]}.snps.fixmate.intra3k.SPloop.decoupled.bed 
 
 # 1st subsetting
 (samtools view -H $workdir/${NAME[$i]}_snps_properPairs_fixmate.sorted.dedup.sort.RG.bam; samtools view -L $workdir/${NAME[$i]}.snps.fixmate.intra3k.SPloop.decoupled.bed $workdir/${NAME[$i]}_snps_properPairs_fixmate.sorted.dedup.sort.RG.bam) | samtools view -Su - |samtools sort -n -@ 2 - |samtools fixmate -r -p - $workdir/temp.fixmate.bam
