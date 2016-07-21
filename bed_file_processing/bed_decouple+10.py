@@ -34,5 +34,5 @@ for line in fhi:
 	else:
 		strand1 = s1
 		strand2 = s2
-	print "%s\t%s\t%s\t%s\t%s" % (species1, fcoord1, rcoord1, ID, strand1) 
-	print "%s\t%s\t%s\t%s\t%s" % (species2, fcoord2, rcoord2, ID, strand2)
+	print "%s\t%s\t%s\t%s\t%s" % (species1, fcoord1-10, rcoord1+10, ID, strand1) 
+	print "%s\t%s\t%s\t%s\t%s" % (species2, fcoord2-10, rcoord2+10, ID, strand2)
