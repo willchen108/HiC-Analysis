@@ -1,6 +1,6 @@
 # This file is create by Will @ 2016.05.13
 # This file is used to merge the allel specific counts from SNPs Capture data and Promoter Capture data.
-# Usage 
+# Usage python ~/HiC-Analysis/Allele_specific_count/SNPsCap_PromoterCap_merge.py ${NAME[$i]}_eQTL.csv ${NAME[$i]}_promoters.csv > /net/shendure/vol1/home/wchen108/data/AScount/${NAME[$i]}_merged_count.csv
 import os,sys,re
 f1 = open(sys.argv[1])
 f2 = open(sys.argv[2])
