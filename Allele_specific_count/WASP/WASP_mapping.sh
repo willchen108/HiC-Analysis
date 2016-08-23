@@ -23,6 +23,6 @@ samtools merge $projdir/${NAME}_$suffix.wasp.bam $projdir/${NAME}_$suffix.keep.b
 #samtools sort -o $projdir/${NAME}.realigned.wasp.sorted.bam $projdir/${NAME}_$suffix.wasp.bam
 #samtools index $projdir/${NAME}.realigned.wasp.sorted.bam
 rm $projdir/${NAME}_$suffix.remap.fq.gz
-rm $projdir/${NAME}_$suffix.to.remap.num.gz 
+rm $projdir/${NAME}_$suffix.to.remap.num.gz
 rm $projdir/${NAME}_$suffix.remapped.bam
 rm ${NAME}_$suffix.remap.keep.bam
