@@ -27,7 +27,7 @@ for line in Promoterfile:
 
 NP_list=[]
 for chrom in SNPs:
-	for snp in SNPfile[chrom]:
+	for snp in SNPs[chrom]:
 		mdis = 1e10
 		pro  = [0,0,0]
 		for promoter in promoters[chrom]:
