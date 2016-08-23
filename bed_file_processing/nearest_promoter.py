@@ -35,4 +35,4 @@ for chrom in SNPs:
 				if abs(dis) < abs(mdis):
 					mdis = dis
 					pro  = promoter
-		print "%s\t%s\t%s\t%s\t%s\t%s\t%s"% (chrom,snp[0]-50,snp[0]+50,snp[1],pro[0],pro[1],pro[2])
+			print "%s\t%s\t%s\t%s\t%s\t%s\t%s"% (chrom,snp[0]-50,snp[0]+50,snp[1],pro[0],pro[1],pro[2])
