@@ -22,11 +22,11 @@ for line in promlist:
 SNPs={}
 for snp in snplist:
 	chrom,fwd,rev,ref = snp.split()[0:4]
-	if chrid in SNPs:
-		SNPs[chrid].append([int(fwd),int(rev),ref])
+	if chrom in SNPs:
+		SNPs[chrom].append([int(fwd),int(rev),ref])
 	else:
-		SNPs[chrid] = []
-		SNPs[chrid].append([int(fwd),int(rev),ref])
+		SNPs[chrom] = []
+		SNPs[chrom].append([int(fwd),int(rev),ref])
 
 #first round filter with promoter
 temp=[]
@@ -37,11 +37,18 @@ for line in bed:
 	fcoord2,rcoord2 = int(split[4]),int(split[5]) #reverse coordinate 
 	species1 = split[0] #ChrID of Mate 1
 	species2 = split[3] #ChrID of Mate 2
-	for chrom in promoters:
-		for promoter in promoters[chrom]:  #In the temp bed file, SNP coordinate comes first.
+	if species1 == species2:
+		for promoter in promoters[species1]:  #In the temp bed file, SNP coordinate comes first.
 			if promoter[0] < fcoord1 < promoter[1] or promoter[0] < rcoord1 < promoter[1]:
 				temp.append([species2,fcoord2,rcoord2,species1,fcoord1,rcoord1,split[6],split[7],split[8],split[9]])
 			elif promoter[0] < fcoord2 < promoter[1] or promoter[0] < rcoord2 < promoter[1]:
+				temp.append([species1,fcoord1,rcoord1,species2,fcoord2,rcoord2,split[6],split[7],split[8],split[9]])
+	else:
+		for promoter in promoters[species1]:  #In the temp bed file, SNP coordinate comes first.
+			if promoter[0] < fcoord1 < promoter[1] or promoter[0] < rcoord1 < promoter[1]:
+				temp.append([species2,fcoord2,rcoord2,species1,fcoord1,rcoord1,split[6],split[7],split[8],split[9]])
+		for promoter in promoters[species2]:  #In the temp bed file, SNP coordinate comes first.
+			if promoter[0] < fcoord2 < promoter[1] or promoter[0] < rcoord2 < promoter[1]:
 				temp.append([species1,fcoord1,rcoord1,species2,fcoord2,rcoord2,split[6],split[7],split[8],split[9]])
 #second round filter with SNPs
 
