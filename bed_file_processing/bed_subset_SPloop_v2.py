@@ -1,7 +1,7 @@
 #Create by Will Chen @ 2016.05.23
 #Modified @ 2016.08.31 to take trans qtl and promoter interaction
 # This file is used to subset the bed file with loops that are SNP-promoter loops.
-# python ~/HiC-Analysis/bed_file_processing/bed_subset_SPloop.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/eqtl_snps_centered_snp_101bp_chr_removed.bed $workdir/${NAME[$i]}.bed.deduped > $workdir/Promoters/$i/${NAME[$i]}_SPloops_promotercap_1k.dedup.bed &
+# python ~/HiC-Analysis/bed_file_processing/bed_subset_SPloop_v2.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/eqtl_snps_centered_snp_101bp_chr_removed.bed $workdir/${NAME[$i]}.bed.deduped > $workdir/Promoters/$i/${NAME[$i]}_SPloops_promotercap_1k.dedup.bed &
 
 
 import os,sys,re
@@ -20,7 +20,7 @@ for line in promlist:
 		promoters[chrom].append([int(fwd),int(rev)])
  
 SNPs={}
-for snp in SNPsfile:
+for snp in snplist:
 	chrom,fwd,rev,ref = snp.split()[0:4]
 	if chrid in SNPs:
 		SNPs[chrid].append([int(fwd),int(rev),ref])
