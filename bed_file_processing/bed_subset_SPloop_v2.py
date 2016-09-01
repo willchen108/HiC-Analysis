@@ -58,4 +58,4 @@ for line in temp:
 		if line[0] == chrom:
 			for snp in SNPs[chrom]:
 				if snp[0] < start < snp[1] or snp[0] < end < snp[1]:
-					print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % (line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7],line[8],line[9],line[10])
+					print "%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s\t%s" % (line[0],line[1],line[2],line[3],line[4],line[5],line[6],line[7],line[8],line[9])
