@@ -1,28 +1,24 @@
 #Create by Will Chen @ 2016.05.24
 #requires 10 cores and 10G
 #Used to run WASP_mapping pipeline
-#usage sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters 12878
-# 	or sh ~/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters 12878
+#usage sh /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh $workdir ${NAME[$i]} S${i}_R1_001.fastq.bwam.sort
 
-projdir=$1
+workdir=$1
 NAME=$2
 suffix=$3
-cd $projdir
 
 #Step 2 
-python ~/tools/WASP/mapping/find_intersecting_snps.py -s $projdir/${NAME}_$suffix.bam /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/SNPlist_wasp/
+python ~/tools/WASP/mapping/find_intersecting_snps.py -s $workdir/${NAME}.$suffix.bam /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/SNPlist_wasp/
 
 #Step 3
-bwa mem -M /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs37d5/hs37d5.fa $projdir/${NAME}_$suffix.remap.fq.gz | samtools view -bS > $projdir/${NAME}_$suffix.remapped.bam
-
+bwa mem -M /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs37d5/hs37d5.fa $workdir/${NAME}.$suffix.remap.fq.gz | samtools view -bS > $workdir/${NAME}.$suffix.remapped.bam
 
 #Step 4
-python ~/tools/WASP/mapping/filter_remapped_reads.py $projdir/${NAME}_$suffix.to.remap.bam $projdir/${NAME}_$suffix.remapped.bam ${NAME}_$suffix.remap.keep.bam $projdir/${NAME}_$suffix.to.remap.num.gz 
+python ~/tools/WASP/mapping/filter_remapped_reads.py $workdir/${NAME}.$suffix.to.remap.bam $workdir/${NAME}.$suffix.remapped.bam ${NAME}.$suffix.remap.keep.bam $workdir/${NAME}.$suffix.to.remap.num.gz 
 
-samtools merge $projdir/${NAME}_$suffix.wasp.bam $projdir/${NAME}_$suffix.keep.bam $projdir/${NAME}_$suffix.remap.keep.bam 
-#samtools sort -o $projdir/${NAME}.realigned.wasp.sorted.bam $projdir/${NAME}_$suffix.wasp.bam
-#samtools index $projdir/${NAME}.realigned.wasp.sorted.bam
-rm $projdir/${NAME}_$suffix.remap.fq.gz
-rm $projdir/${NAME}_$suffix.to.remap.num.gz
-rm $projdir/${NAME}_$suffix.remapped.bam
-rm ${NAME}_$suffix.remap.keep.bam
+samtools merge $workdir/${NAME}.$suffix.wasped.bam $workdir/${NAME}.$suffix.keep.bam $workdir/${NAME}.$suffix.remap.keep.bam 
+
+rm $workdir/${NAME}.$suffix.remap.fq.gz
+rm $workdir/${NAME}.$suffix.to.remap.num.gz
+rm $workdir/${NAME}.$suffix.remapped.bam
+rm ${NAME}.$suffix.remap.keep.bam

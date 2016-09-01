@@ -1,8 +1,9 @@
 #Create by Will Chen @ 2016.04.11, borrow from sort_strandedness_bulk.py
 import os,sys,re
 #BED file of mapped reads
-fhi = open(sys.argv[2])
-distance = int(sys.argv[1])
+pos = sys.argv[1]
+distance = int(sys.argv[2])
+fhi = open(sys.argv[3])
 #Just a list with different types of ligation junctions
 
 for line in fhi:
@@ -14,6 +15,11 @@ for line in fhi:
 	species1 = split[0] #ChrID of Mate 1
 	species2 = split[3] #ChrID of Mate 2
 	if mapq > 0:#Keep tally of reads with MAPQ > 0
-		if species1 == species2:
-			if rcoord2 - fcoord1 > distance: 
-				print "%s" % (line.rstrip('\n'))
+		if pos == 'intra':
+			if species1 == species2:
+				if rcoord2 - fcoord1 > distance: 
+					print "%s" % (line.rstrip('\n'))
+		elif pos == 'inter':
+			if species1 != species2:
+				if rcoord2 - fcoord1 > distance: 
+					print "%s" % (line.rstrip('\n'))

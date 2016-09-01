@@ -71,30 +71,30 @@ RGPU=unit1 \
 RGSM=20 \
 VALIDATION_STRINGENCY=SILENT
 
-
-# Sort again
-samtools sort -@ 10 -o $destdir/${NAME[$i]}.${suffix}.sorted.dedup.sort.bam $destdir/${NAME[$i]}.${suffix}.sorted.dedup.bam
-samtools index $destdir/${NAME[$i]}.${suffix}.sorted.dedup.sort.RG.bam
-
 # sortname
 samtools sort -@ 10 -n -o $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.sortname.bam $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.bam
+
+#convert to paired bed files
 bedtools bamtobed -bedpe -mate1 -i $destdir/${NAME[$i]}_${suffix}.sorted.dedup.sort.RG.bam > $destdir/${NAME[$i]}_${suffix}.bedpe
 wait
 rm $destdir/${NAME[$i]}.${suffix}.sorted.dedup.bam
 rm $destdir/${NAME[$i]}.${suffix}.sorted.bam
+
+# subset intra 3k, 10k and intra pairs
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py intra 3000 $destdir/${NAME[$i]}_${suffix}.bedpe > $destdir/${NAME[$i]}.$suffix.intra3k.bed &
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py intra 10000 $destdir/${NAME[$i]}_${suffix}.bedpe > $destdir/${NAME[$i]}.$suffix.intra10k.bed &
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py inter 0 $destdir/${NAME[$i]}_${suffix}.bedpe > $destdir/${NAME[$i]}.$suffix.inter.bed &
+
+# Subset SPloops
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_subset_SPloop.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/eqtl_snps_centered_snp_101bp_chr_removed.bed $destdir/${NAME[$i]}.$suffix.intra3k.bed > $destdir/${NAME[$i]}.$suffix.intra3k.SPloop.bed &
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_subset_SPloop.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/eqtl_snps_centered_snp_101bp_chr_removed.bed $destdir/${NAME[$i]}.$suffix.intra10k.bed > $destdir/${NAME[$i]}.$suffix.intra10k.SPloop.bed &
+
 #convert to h5 files
 #Rscript ~/HiC-Analysis/Plotting/prepPseudoPairs.r $destdir/ ${NAME[$i]} ${suffix}.sorted.dedup.sort.RG &
 
-#convert to paired bed files
-
-
-# subset intra 3k and 10k pairs
-python ~/HiC-Analysis/bed_file_processing/bed_partition.py 3000 $destdir/${NAME[$i]}_${suffix}.bedpe > $destdir/${NAME[$i]}.$suffix.intra3k.bed &
-python ~/HiC-Analysis/bed_file_processing/bed_partition.py 10000 $destdir/${NAME[$i]}_${suffix}.bedpe > $destdir/${NAME[$i]}.$suffix.intra10k.bed &
-
-# Subset SPloops
-python ~/HiC-Analysis/bed_file_processing/bed_subset_SPloop.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed $destdir/${NAME[$i]}.$suffix.intra3k.bed > $destdir/${NAME[$i]}.$suffix.intra3k.SPloop.bed &ß
-python ~/HiC-Analysis/bed_file_processing/bed_subset_SPloop.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed $destdir/${NAME[$i]}.$suffix.intra10k.bed > $destdir/${NAME[$i]}.$suffix.intra10k.SPloop.bed &
+# Sort again
+samtools sort -@ 10 -o $destdir/${NAME[$i]}.${suffix}.sorted.dedup.sort.bam $destdir/${NAME[$i]}.${suffix}.sorted.dedup.bam
+samtools index $destdir/${NAME[$i]}.${suffix}.sorted.dedup.sort.RG.bam
 
 
 #GATK ASE count

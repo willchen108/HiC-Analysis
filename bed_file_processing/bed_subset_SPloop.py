@@ -1,4 +1,5 @@
 #Create by Will Chen @ 2016.05.23
+#Modified @ 2016.08.31 to take trans qtl and promoter interaction
 # This file is used to subset the bed file with loops that are SNP-promoter loops.
 # python ~/HiC-Analysis/bed_file_processing/bed_subset_SPloop.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed $workdir/${NAME[$i]}.bed.deduped > $workdir/Promoters/$i/${NAME[$i]}_SPloops_promotercap_1k.dedup.bed &
 
@@ -19,11 +20,8 @@ for line in bedfile:
  
 for line in bed:
 	split = line.split() #split BED file
-	fcoord1 = int(split[1]) #forward coordinate
-	rcoord1 = int(split[2])
-	if fcoord1 == -1: continue #if either mate is unmapped, fcoord = -1
-	fcoord2 = int(split[4])
-	rcoord2 = int(split[5]) #reverse coordinate 
+	fcoord1,rcoord1 = int(split[1]),int(split[2]) #forward coordinate
+	fcoord2,rcoord2 = int(split[4]),int(split[5]) #reverse coordinate 
 	mapq = int(split[7]) # mapq
 	species1 = split[0] #ChrID of Mate 1
 	species2 = split[3] #ChrID of Mate 2
