@@ -55,9 +55,6 @@ RGSM=20 \
 VALIDATION_STRINGENCY=SILENT
 
 
-
-
-
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-2.3.0/picard.jar MarkDuplicates \
       VALIDATION_STRINGENCY=SILENT \
       I=12878_snps_properPairs_fixmate.sorted.bam \
@@ -69,10 +66,16 @@ java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-2.3.0/picard.jar M
 12878_snps_properPairs_fixmate.sorted.bam
 
 
+sh ~/HiC-Analysis/Allele_specific_count/fixmate_pipeline_temp.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters/8 8 snps.fixmate /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/DHCV2/8
 
+
+ snps_properPairs_fixmate
 
 python ~/HiC-Analysis/bed_file_processing/bed_subset_SPloop_v2.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/eqtl_snps_centered_snp_101bp_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will/8/12872.snps.fixmate.intra3k.bed > /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will/8/12872.snps.fixmate.SPloops.bed
 
 
 
 python ~/HiC-Analysis/bed_file_processing/bed_subset_SPloop_v2.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/eqtl_snps_centered_snp_101bp_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will/3/12878.snps.fixmate.intra10k.bed > /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will/3/12878.snps.fixmate.SPloops.bed
+
+python ~/HiC-Analysis/bed_file_processing/bed_subset_SPloop_v2.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/eqtl_snps_centered_snp_101bp_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will/8/12872.promoters.fixmate.intra1k.bed > /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will/8/12878.promoters.fixmate.SPloops.bed
+
