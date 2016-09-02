@@ -17,9 +17,9 @@ for line in fhi:
 	if mapq > 0:#Keep tally of reads with MAPQ > 0
 		if pos == 'intra':
 			if species1 == species2:
-				if rcoord2 - fcoord1 > distance: 
+				if abs(rcoord2 - fcoord1) > distance: 
 					print "%s" % (line.rstrip('\n'))
 		elif pos == 'inter':
 			if species1 != species2:
-				if rcoord2 - fcoord1 > distance: 
+				if abs(rcoord2 - fcoord1) > distance: 
 					print "%s" % (line.rstrip('\n'))
