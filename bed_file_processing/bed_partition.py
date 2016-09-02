@@ -21,5 +21,4 @@ for line in fhi:
 					print "%s" % (line.rstrip('\n'))
 		elif pos == 'inter':
 			if species1 != species2:
-				if abs(rcoord2 - fcoord1) > distance: 
-					print "%s" % (line.rstrip('\n'))
+				print "%s" % (line.rstrip('\n'))
