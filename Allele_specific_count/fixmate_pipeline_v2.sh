@@ -75,7 +75,7 @@ VALIDATION_STRINGENCY=SILENT
 samtools sort -@ 10 -n -o $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.sortname.bam $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.bam
 
 #convert to paired bed files
-bedtools bamtobed -bedpe -mate1 -i $destdir/${NAME[$i]}_${suffix}.sorted.dedup.sort.RG.bam > $destdir/${NAME[$i]}_${suffix}.bedpe
+bedtools bamtobed -bedpe -mate1 -i $destdir/${NAME[$i]}_${suffix}.sorted.dedup.RG.bam > $destdir/${NAME[$i]}.${suffix}.bedpe
 wait
 rm $destdir/${NAME[$i]}.${suffix}.sorted.dedup.bam
 rm $destdir/${NAME[$i]}.${suffix}.sorted.bam

@@ -73,6 +73,21 @@ sh ~/HiC-Analysis/Allele_specific_count/fixmate_pipeline_temp.sh /net/shendure/v
 
 python ~/HiC-Analysis/bed_file_processing/bed_subset_SPloop_v2.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/eqtl_snps_centered_snp_101bp_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will/8/12872.snps.fixmate.intra3k.bed > /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will/8/12872.snps.fixmate.SPloops.bed
 
+bedtools bamtobed -bedpe -mate1 -i $destdir/12872.snps.fixmate.sorted.dedup.RG.sortname.bam > $destdir/12872.snps.fixmate.bedpe
+
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py intra 3000 $destdir/12872.snps.fixmate.bedpe > $destdir/12872.snps.fixmate.intra3k.bed &
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py intra 10000 $destdir/12872.snps.fixmate.bedpe > $destdir/12872.snps.fixmate.intra10k.bed &
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py inter 0 $destdir/12872.snps.fixmate.bedpe > $destdir/12872.snps.fixmate.inter.bed &
+
+
+
+
+
+
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py intra 3000 $destdir/12872.snps.fixmate.bedpe > $destdir/12872.snps.fixmate.intra3kv2.bed &
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py intra 10000 $destdir/12872.snps.fixmate.bedpe > $destdir/12872.snps.fixmate.intra10kv2.bed &
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py inter 0 $destdir/12872.snps.fixmate.bedpe > $destdir/12872.snps.fixmate.interv2.bed &
+
 
 
 python ~/HiC-Analysis/bed_file_processing/bed_subset_SPloop_v2.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/eqtl_snps_centered_snp_101bp_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will/3/12878.snps.fixmate.intra10k.bed > /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will/3/12878.snps.fixmate.SPloops.bed
