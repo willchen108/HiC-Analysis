@@ -9,5 +9,5 @@ destdir=$3
 for i in {1..10}
 do 
 mkdir $destdir/$i
-sh ~/HiC-Analysis/Allele_specific_count/fixmate_pipeline.sh $workdir/$i $i $suffix $destdir/$i &
+sh ~/HiC-Analysis/Allele_specific_count/fixmate_pipeline_temp.sh $workdir/$i $i $suffix $destdir/$i &
 done 

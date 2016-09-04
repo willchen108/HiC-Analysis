@@ -27,7 +27,7 @@ rm $r1.bwam.bam
 rm $r2.bwam.bam
 
 # Merge 2 bam files and add pair flag
-#( ~mkircher/bin/samtools view -H $r1.bwam.sort.wasp.bam; ~mkircher/bin/samtools view -X $r1.bwam.sort.wasp.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP1"$2; print }' ; ~mkircher/bin/samtools view -X $r2.bwam.sort.wasp.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP2"$2; print }' ) | ~mkircher/bin/samtools view -Su - | samtools sort -n -@ 10 - -T $workdir/${NAME[$i]}_test_snps | samtools fixmate -r -p - $destdir/${NAME[$i]}.${suffix}.bam
+( ~mkircher/bin/samtools view -H $r1.bwam.sort.wasp.bam; ~mkircher/bin/samtools view -X $r1.bwam.sort.wasp.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP1"$2; print }' ; ~mkircher/bin/samtools view -X $r2.bwam.sort.wasp.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP2"$2; print }' ) | ~mkircher/bin/samtools view -Su - | samtools sort -n -@ 10 - -T $workdir/${NAME[$i]}_test_snps | samtools fixmate -r -p - $destdir/${NAME[$i]}.${suffix}.bam
 
 # sort
 samtools sort -@ 10 -o $destdir/${NAME[$i]}.${suffix}.sorted.bam $destdir/${NAME[$i]}.${suffix}.bam
