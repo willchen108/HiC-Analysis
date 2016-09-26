@@ -84,6 +84,22 @@ python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_par
 
 
 
+sh ~/HiC-Analysis/Allele_specific_count/fixmate_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters snps.fixmate /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_v2
+
+
+
+
+workdir=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters
+suffix=snps.fixmate
+destdir=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_v2
+for i in {1..10}
+do 
+mkdir $destdir/$i
+sh ~/HiC-Analysis/Allele_specific_count/fixmate_pipeline_temp.sh $workdir/$i $i $suffix $destdir/$i &
+done 
+
+
+
 python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py intra 3000 $destdir/12872.snps.fixmate.bedpe > $destdir/12872.snps.fixmate.intra3kv2.bed &
 python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py intra 10000 $destdir/12872.snps.fixmate.bedpe > $destdir/12872.snps.fixmate.intra10kv2.bed &
 python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py inter 0 $destdir/12872.snps.fixmate.bedpe > $destdir/12872.snps.fixmate.interv2.bed &
