@@ -21,7 +21,7 @@ suffix=$3
 destdir=$4
 
 #convert to paired bed files
-bedtools bamtobed -bedpe -mate1 -i $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.sortname.bam > $destdir/${NAME[$i]}_${suffix}.bedpe
+bedtools bamtobed -bedpe -mate1 -i $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.sortname.bam > $destdir/${NAME[$i]}.${suffix}.bedpe
 wait
 
 # subset intra 3k, 10k and intra pairs
