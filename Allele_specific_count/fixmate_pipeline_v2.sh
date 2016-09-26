@@ -62,28 +62,28 @@ java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar M
 
 #Add Readgroup
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar AddOrReplaceReadGroups \
-I=$destdir/${NAME[$i]}.${suffix}.sorted.dedup.bam \
-O=$destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.bam  \
-RGID=NA${NAME[$i]} \
-RGLB=lib1 \
-RGPL=illumina \
-RGPU=unit1 \
-RGSM=20 \
-VALIDATION_STRINGENCY=SILENT
+      I=$destdir/${NAME[$i]}.${suffix}.sorted.dedup.bam \
+      O=$destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.bam  \
+      RGID=NA${NAME[$i]} \
+      RGLB=lib1 \
+      RGPL=illumina \
+      RGPU=unit1 \
+      RGSM=20 \
+      VALIDATION_STRINGENCY=SILENT
 
 # sortname
 samtools sort -@ 10 -n -o $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.sortname.bam $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.bam
 
 #convert to paired bed files
-bedtools bamtobed -bedpe -mate1 -i $destdir/${NAME[$i]}_${suffix}.sorted.dedup.RG.bam > $destdir/${NAME[$i]}.${suffix}.bedpe
+bedtools bamtobed -bedpe -mate1 -i $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.sortname.bam > $destdir/${NAME[$i]}.${suffix}.bedpe
 wait
 rm $destdir/${NAME[$i]}.${suffix}.sorted.dedup.bam
 rm $destdir/${NAME[$i]}.${suffix}.sorted.bam
 
 # subset intra 3k, 10k and intra pairs
-python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py intra 3000 $destdir/${NAME[$i]}_${suffix}.bedpe > $destdir/${NAME[$i]}.$suffix.intra3k.bed &
-python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py intra 10000 $destdir/${NAME[$i]}_${suffix}.bedpe > $destdir/${NAME[$i]}.$suffix.intra10k.bed &
-python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py inter 0 $destdir/${NAME[$i]}_${suffix}.bedpe > $destdir/${NAME[$i]}.$suffix.inter.bed &
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py intra 3000 $destdir/${NAME[$i]}.${suffix}.bedpe > $destdir/${NAME[$i]}.$suffix.intra3k.bed &
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py intra 10000 $destdir/${NAME[$i]}.${suffix}.bedpe > $destdir/${NAME[$i]}.$suffix.intra10k.bed &
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py inter 0 $destdir/${NAME[$i]}.${suffix}.bedpe > $destdir/${NAME[$i]}.$suffix.inter.bed &
 
 # Subset SPloops
 python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_subset_SPloop.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/eqtl_snps_centered_snp_101bp_chr_removed.bed $destdir/${NAME[$i]}.$suffix.intra3k.bed > $destdir/${NAME[$i]}.$suffix.intra3k.SPloop.bed &
