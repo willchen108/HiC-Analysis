@@ -82,7 +82,7 @@ python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_par
 
 
 
-
+python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_subset_SPloop_v2.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/eqtl_snps_centered_snp_101bp_chr_removed.bed $destdir/8/12872.snps.fixmate.intra3k.bed > $destdir/8/12872.$suffix.intra3k.SPloop.bed1 &
 
 sh ~/HiC-Analysis/Allele_specific_count/fixmate_bulk.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters snps.fixmate /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_v2
 
