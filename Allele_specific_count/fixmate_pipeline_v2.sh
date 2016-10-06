@@ -86,17 +86,17 @@ rm $destdir/${NAME[$i]}.${suffix}.temp.bedpe
 python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py intra 3000 $destdir/${NAME[$i]}.${suffix}.bedpe > $destdir/${NAME[$i]}.$suffix.intra3k.bed &
 python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py intra 10000 $destdir/${NAME[$i]}.${suffix}.bedpe > $destdir/${NAME[$i]}.$suffix.intra10k.bed &
 python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_partition.py inter 0 $destdir/${NAME[$i]}.${suffix}.bedpe > $destdir/${NAME[$i]}.$suffix.inter.bed &
-
+wait
 # Subset SPloops
 python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_subset_SPloop.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/eqtl_snps_centered_snp_101bp_chr_removed.bed $destdir/${NAME[$i]}.$suffix.intra3k.bed > $destdir/${NAME[$i]}.$suffix.intra3k.SPloop.bed &
 python /net/shendure/vol1/home/wchen108/HiC-Analysis/bed_file_processing/bed_subset_SPloop.py /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/gencode.v19_promoter_chr_removed.bed /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/eqtl_snps_centered_snp_101bp_chr_removed.bed $destdir/${NAME[$i]}.$suffix.intra10k.bed > $destdir/${NAME[$i]}.$suffix.intra10k.SPloop.bed &
-
+wait
 #convert to h5 files
 #Rscript ~/HiC-Analysis/Plotting/prepPseudoPairs.r $destdir/ ${NAME[$i]} ${suffix}.sorted.dedup.sort.RG &
 
 # Sort again
-samtools sort -@ 10 -o $destdir/${NAME[$i]}.${suffix}.sorted.dedup.sort.bam $destdir/${NAME[$i]}.${suffix}.sorted.dedup.bam
-samtools index $destdir/${NAME[$i]}.${suffix}.sorted.dedup.sort.RG.bam
+samtools sort -@ 10 -o $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.sort.bam $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.bam
+samtools index $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.sort.bam
 
 
 #GATK ASE count
@@ -104,7 +104,7 @@ java -jar /net/gs/vol3/software/modules-sw/GATK/3.5/Linux/RHEL6/x86_64/GenomeAna
   -R /net/shendure/vol10/nobackup/shared/genomes/human_g1k_hs37d5/hs37d5.fa \
   -T ASEReadCounter \
   -o $destdir/${NAME[$i]}.${suffix}.csv \
-  -I $destdir/${NAME[$i]}.${suffix}.sorted.dedup.sort.RG.bam \
+  -I $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.sort.bam \
   -sites /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/SNPs_release/eQTL_SNPs/Biallelic_eQTL_SNPs.vcf \
   -U ALLOW_N_CIGAR_READS \
   &
