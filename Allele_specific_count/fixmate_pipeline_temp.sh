@@ -15,17 +15,6 @@ NAME[8]=12872
 NAME[9]=12873
 NAME[10]=12874
 
-NAME[1]=10847
-NAME[2]=12814
-NAME[3]=12878
-NAME[4]=12815
-NAME[5]=12812
-NAME[6]=12813
-NAME[7]=12875
-NAME[8]=12872
-NAME[9]=12873
-NAME[10]=12874
-
 workdir=$1
 i=$2
 suffix=$3
@@ -33,11 +22,6 @@ destdir=$4
 
 r1=$workdir/${NAME[$i]}_S${i}_R1_001.fastq
 r2=$workdir/${NAME[$i]}_S${i}_R2_001.fastq
-
-#Clip off bridge adapter
-fastx_clipper -a GCTGAGGGATCCCTCAGC -l 20 -Q33 -i $r1 -o $r1.clipped -v > $r1.clipping_stats&
-fastx_clipper -a GCTGAGGGATCCCTCAGC -l 20 -Q33 -i $r2 -o $r2.clipped -v > $r2.clipping_stats& 
-wait
 
 #Align each read separately with BWA MEM -M 
 bwa mem -M /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs37d5/hs37d5.fa $r1.clipped | samtools view -bS - > $r1.bwam.bam&
@@ -48,8 +32,7 @@ wait
 samtools sort -@ 5 -o $r1.bwam.sort.bam $r1.bwam.bam &
 samtools sort -@ 5 -o $r2.bwam.sort.bam $r2.bwam.bam &
 wait
-rm $r1.bwam.bam
-rm $r2.bwam.bam
+
 
 # WASP
 sh /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh $workdir ${NAME[$i]} S${i}_R1_001.fastq.bwam.sort &
