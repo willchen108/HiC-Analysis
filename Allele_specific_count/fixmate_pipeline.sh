@@ -30,7 +30,7 @@ wait
 
 #Align each read separately with BWA MEM -M 
 bwa mem -M /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs37d5/hs37d5.fa $r1.clipped | samtools view -bS - > $r1.bwam.bam&
-bwa mem -M /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs37d5/hs37d5.fa $r2.clipped | samtools view -bS - > $r1.bwam.bam&
+bwa mem -M /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs37d5/hs37d5.fa $r2.clipped | samtools view -bS - > $r2.bwam.bam&
 wait
 
 # Sort for WASP
