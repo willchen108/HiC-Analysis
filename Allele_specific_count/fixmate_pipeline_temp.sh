@@ -30,8 +30,8 @@ bwa mem -M /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs
 wait
 
 # Sort for WASP
-samtools sort -@ 5 -o $r1.bwam.sort.bam $r1.bwam.bam &
-samtools sort -@ 5 -o $r2.bwam.sort.bam $r2.bwam.bam &
+samtools sort -o $r1.bwam.sort.bam $r1.bwam.bam &
+samtools sort -o $r2.bwam.sort.bam $r2.bwam.bam &
 wait
 
 # WASP
