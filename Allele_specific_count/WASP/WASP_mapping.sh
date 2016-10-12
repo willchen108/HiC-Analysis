@@ -8,17 +8,17 @@ NAME=$2
 suffix=$3
 
 #Step 2 
-python ~/tools/WASP/mapping/find_intersecting_snps.py -s $workdir/${NAME}.$suffix.bam /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/SNPlist_wasp/
+python ~/tools/WASP/mapping/find_intersecting_snps.py -s $workdir/${NAME}_$suffix.bam /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/SNPlist_wasp/
 
 #Step 3
-bwa mem -M /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs37d5/hs37d5.fa $workdir/${NAME}.$suffix.remap.fq.gz | samtools view -bS > $workdir/${NAME}.$suffix.remapped.bam
+bwa mem -M /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs37d5/hs37d5.fa $workdir/${NAME}_$suffix.remap.fq.gz | samtools view -bS > $workdir/${NAME}_$suffix.remapped.bam
 
 #Step 4
-python ~/tools/WASP/mapping/filter_remapped_reads.py $workdir/${NAME}.$suffix.to.remap.bam $workdir/${NAME}.$suffix.remapped.bam ${NAME}.$suffix.remap.keep.bam $workdir/${NAME}.$suffix.to.remap.num.gz 
+python ~/tools/WASP/mapping/filter_remapped_reads.py $workdir/${NAME}_$suffix.to.remap.bam $workdir/${NAME}_$suffix.remapped.bam ${NAME}_$suffix.remap.keep.bam $workdir/${NAME}_$suffix.to.remap.num.gz 
 
-samtools merge $workdir/${NAME}.$suffix.wasped.bam $workdir/${NAME}.$suffix.keep.bam $workdir/${NAME}.$suffix.remap.keep.bam 
+samtools merge $workdir/${NAME}.$suffix.wasped.bam $workdir/${NAME}_$suffix.keep.bam $workdir/${NAME}_$suffix.remap.keep.bam 
 
-rm $workdir/${NAME}.$suffix.remap.fq.gz
-rm $workdir/${NAME}.$suffix.to.remap.num.gz
-rm $workdir/${NAME}.$suffix.remapped.bam
-rm ${NAME}.$suffix.remap.keep.bam
+rm $workdir/${NAME}_$suffix.remap.fq.gz
+rm $workdir/${NAME}_$suffix.to.remap.num.gz
+rm $workdir/${NAME}_$suffix.remapped.bam
+rm ${NAME}_$suffix.remap.keep.bam
