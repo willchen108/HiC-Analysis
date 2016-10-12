@@ -34,6 +34,7 @@ samtools sort -@ 5 -o $r1.bwam.sort.bam $r1.bwam.bam &
 samtools sort -@ 5 -o $r2.bwam.sort.bam $r2.bwam.bam &
 wait
 
+
 # WASP
 sh /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh $workdir ${NAME[$i]} S${i}_R1_001.fastq.bwam.sort &
 sh /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh $workdir ${NAME[$i]} S${i}_R2_001.fastq.bwam.sort &
