@@ -72,7 +72,7 @@ java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar A
       VALIDATION_STRINGENCY=SILENT
 
 # sortname
-samtools sort -@ 10 -n -o $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.sortname.bam $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.bam
+samtools sort -n -o $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.sortname.bam $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.bam
 
 #convert to paired bed files
 bedtools bamtobed -bedpe -mate1 -i $destdir/${NAME[$i]}.${suffix}.sorted.dedup.RG.sortname.bam > $destdir/${NAME[$i]}.${suffix}.temp.bedpe

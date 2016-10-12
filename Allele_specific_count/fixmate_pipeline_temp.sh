@@ -30,7 +30,7 @@ sh /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/WASP/WASP
 wait
 
 # Merge 2 bam files and add pair flag
-( ~mkircher/bin/samtools view -H $r1.bwam.sort.wasped.bam; ~mkircher/bin/samtools view -X $r1.bwam.sort.wasped.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP1"$2; print }' ; ~mkircher/bin/samtools view -X $r2.bwam.sort.wasped.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP2"$2; print }' ) | ~mkircher/bin/samtools view -Su - | samtools sort -n -@ 10 - -T $workdir/${NAME[$i]}_test_snps | samtools fixmate -r -p - $destdir/${NAME[$i]}.${suffix}.bam
+( ~mkircher/bin/samtools view -H $r1.bwam.sort.wasped.bam; ~mkircher/bin/samtools view -X $r1.bwam.sort.wasped.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP1"$2; print }' ; ~mkircher/bin/samtools view -X $r2.bwam.sort.wasped.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP2"$2; print }' ) | ~mkircher/bin/samtools view -Su - | samtools sort -n - -T $workdir/${NAME[$i]}_test_snps | samtools fixmate -r -p - $destdir/${NAME[$i]}.${suffix}.bam
 
 # sort
 samtools sort -o $destdir/${NAME[$i]}.${suffix}.sorted.bam $destdir/${NAME[$i]}.${suffix}.bam
