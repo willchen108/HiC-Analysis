@@ -18,7 +18,7 @@ python ~/tools/WASP/mapping/filter_remapped_reads.py $workdir/${NAME}_$suffix.to
 
 samtools merge $workdir/${NAME}_$suffix.wasped.bam $workdir/${NAME}_$suffix.keep.bam $workdir/${NAME}_$suffix.remap.keep.bam 
 
-rm $workdir/${NAME}_$suffix.remap.fq.gz
-rm $workdir/${NAME}_$suffix.to.remap.num.gz
-rm $workdir/${NAME}_$suffix.remapped.bam
-rm ${NAME}_$suffix.remap.keep.bam
+#rm $workdir/${NAME}_$suffix.remap.fq.gz
+#rm $workdir/${NAME}_$suffix.to.remap.num.gz
+#rm $workdir/${NAME}_$suffix.remapped.bam
+#rm $workdir/${NAME}_$suffix.remap.keep.bam
