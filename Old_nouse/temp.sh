@@ -100,5 +100,10 @@ mkdir $destdir/$i
 sh ~/HiC-Analysis/Allele_specific_count/fixmate_pipeline_temp.sh $workdir/$i $i $suffix $destdir/$i &
 done 
 
+rm *.remap.fq.gz 
+rm *.to.remap.num.gz
+rm *.remapped.bam
+rm *.remap.keep.bam
+
 sh /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters/1 10847 S1_R1_001.fastq.bwam.sort &
 sh /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters/1 10847 S1_R2_001.fastq.bwam.sort &

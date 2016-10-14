@@ -7,6 +7,7 @@ workdir=$1
 NAME=$2
 suffix=$3
 
+cd $workdir
 #Step 2 
 python ~/tools/WASP/mapping/find_intersecting_snps.py -s $workdir/${NAME}_$suffix.bam /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/SNPlist_wasp/
 
