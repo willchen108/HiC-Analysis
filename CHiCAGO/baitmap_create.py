@@ -22,5 +22,5 @@ for line in rmap:
     		for i in bait[Chrom]:
     			if i[0] < start < i[1] or i[0] < end < i[1]:
                     geneName = i[2]
-    				print "%s\t%s\t%s\t%s\t%s" %  (Chrom, start, end, ID,geneName)
-    				break
+                    print "%s\t%s\t%s\t%s\t%s" %  (Chrom, start, end, ID,geneName)
+                    break
