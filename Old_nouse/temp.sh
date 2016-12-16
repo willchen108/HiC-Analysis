@@ -44,11 +44,7 @@ bedtools bamtobed -bedpe -mate1 -i 12872_snps_properPairs_fixmate.sorted.dedup.s
 
 bedtools bamtobed -bedpe -mate1 -i $workdir/12872.fixmate.no.wasp.sorted.dedup.sortname.bam > $workdir/12872.fixmate.no.wasp.bedpe
 wait
-# subset intra 3k and 10k pairs
-python ~/HiC-Analysis/bed_file_processing/bed_partition.py 0 $workdir/12872.fixmate.no.wasp.bedpe > $workdir/12872.fixmate.no.wasp.intra.bed &
-python ~/HiC-Analysis/bed_file_processing/bed_partition.py 1000 $workdir/12872.fixmate.no.wasp.bedpe > $workdir/12872.fixmate.no.wasp.intra1k.bed &
-python ~/HiC-Analysis/bed_file_processing/bed_partition.py 3000 $workdir/12872.fixmate.no.wasp.bedpe > $workdir/12872.fixmate.no.wasp.intra3k.bed &
-python ~/HiC-Analysis/bed_file_processing/bed_partition.py 10000 $workdir/12872.fixmate.no.wasp.bedpe > $workdir/12872.fixmate.no.wasp.intra10k.bed &
+
 
 java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar AddOrReplaceReadGroups \
 I=12872_snps_properPairs_fixmate.sorted.dedup.bam \

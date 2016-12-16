@@ -17,5 +17,5 @@ suffix_I=$2
 baitmap=$3
 for i in {1..10}
 do
-sh /net/shendure/vol1/home/wchen108/tools/chicago/chicagoTools/bam2chicago.sh $projectdir/${NAME[$i]}_$suffix_I.final.bam $baitmap /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/Dnasemap_hs37d5.rmap $projectdir/Chicago/${NAME[$i]}_$suffix_I &
+qsub -l mfree=5G /net/shendure/vol1/home/wchen108/tools/chicago/chicagoTools/bam2chicago.sh $projectdir/$i/${NAME[$i]}.$suffix_I.bam $baitmap /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/Dnasemap_hs37d5.rmap $projectdir/$i/Chicago/${NAME[$i]}.$suffix_I &
 done
