@@ -7,7 +7,7 @@ fname = '/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/probes/'+ sys.argv
 baitfile = open(fname)
 bait = {}
 for line in baitfile:
-	Chrom ,start, end, ID = line.split()[0:4]
+    Chrom ,start, end, ID = line.split()[0:4]
 	if Chrom in bait:
 		bait[Chrom].append([int(start),int(end),ID])
 	else:
@@ -18,9 +18,9 @@ for line in rmap:
     if "start" not in line:
     	Chrom, start, end, ID = line.split()[0:4]
     	start, end = int(float(start)), int(float(end))
-    	if Chrom in bait:
-    		for i in bait[Chrom]:
-    			if i[0] < start < i[1] or i[0] < end < i[1]:
+        if Chrom in bait:
+            for i in bait[Chrom]:
+                if i[0] < start < i[1] or i[0] < end < i[1]:
                     geneName = i[2]
                     print "%s\t%s\t%s\t%s\t%s" %  (Chrom, start, end, ID,geneName)
                     break
