@@ -1,6 +1,6 @@
 #!/bin/sh
 #Create by Will Chen @ 2016.06.16
-#for i in {1..10}; do  qsub -pe serial 4 -l mfree=2G /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/fixmate_pipeline_temp.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters/$i $i promoter.fixmate /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_v2/$i & done
+#for i in {1..10}; do  qsub -l mfree=10G /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/fixmate_pipeline_temp.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters/$i $i promoter.fixmate /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_v2/$i & done
 
 NAME[1]=10847
 NAME[2]=12814
@@ -17,17 +17,6 @@ workdir=$1
 i=$2
 suffix=$3
 destdir=$4
-
-r1=$workdir/${NAME[$i]}_S${i}_R1_001.fastq
-r2=$workdir/${NAME[$i]}_S${i}_R2_001.fastq
-
-# WASP
-sh /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh $workdir ${NAME[$i]} S${i}_R1_001.fastq.bwam.sort &
-sh /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/WASP/WASP_mapping.sh $workdir ${NAME[$i]} S${i}_R2_001.fastq.bwam.sort &
-wait
-
-# Merge 2 bam files and add pair flag
-( ~mkircher/bin/samtools view -H $r1.bwam.sort.wasped.bam; ~mkircher/bin/samtools view -X $r1.bwam.sort.wasped.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP1"$2; print }' ; ~mkircher/bin/samtools view -X $r2.bwam.sort.wasped.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP2"$2; print }' ) | ~mkircher/bin/samtools view -Su - | samtools sort -n - -T $workdir/${NAME[$i]}_test_snps | samtools fixmate -r -p - $destdir/${NAME[$i]}.${suffix}.bam
 
 # sort
 samtools sort -o $destdir/${NAME[$i]}.${suffix}.sorted.bam $destdir/${NAME[$i]}.${suffix}.bam
