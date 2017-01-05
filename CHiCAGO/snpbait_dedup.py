@@ -1,8 +1,8 @@
 # This file is create by Will @ 2017.01.03
 # SNP bait has multiple duplicated baitIDs. Close SNPs are assigned with same baitID
-# python /net/shendure/vol1/home/wchen108/HiC-Analysis/CHiCAGO/snpbait_dedup.py 
+# python /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/snp_5k/SNPs.baitmap /net/shendure/vol1/home/wchen108/HiC-Analysis/CHiCAGO/snpbait_dedup.py 
 import os,sys,re
-baitfile = open('/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/snp_design/SNPs.baitmap')
+baitfile = open(sys.argv[1])
 bait = {}
 for line in baitfile:
     Chrom ,start, end, ID, rsID = line.split()[0:5]
