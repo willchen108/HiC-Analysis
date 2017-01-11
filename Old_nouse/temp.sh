@@ -8,6 +8,15 @@ sh /net/shendure/vol1/home/wchen108/tools/chicago/chicagoTools/bam2chicago.sh $p
 sh /net/shendure/vol1/home/wchen108/tools/chicago/chicagoTools/bam2chicago.sh $projectdir/10847.promoter.fixmate.sorted.dedup.RG.sortname.bam /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/promoter.baitmap /net/shendure/vol10/projects/DNaseHiC.eQTLs/data/Dnasemap_hs37d5.rmap $projectdir/Chicago/
 
 
+( ~mkircher/bin/samtools view -H ERR436029_1.trunc.fastq_bwam.sort.wasped.bam; ~mkircher/bin/samtools view -X ERR436029_1.trunc.fastq_bwam.sort.wasped.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP1"$2; print }' ; ~mkircher/bin/samtools view -X ERR436029_2.trunc.fastq_bwam.sort.wasped.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP2"$2; print }' ) | ~mkircher/bin/samtools view -Su - | samtools sort -n -@ 10 - -T test_snps | samtools fixmate -r -p - ERR436029_1.trunc.fastq_bwam.sort.wasped.bam
+
+( ~mkircher/bin/samtools view -H /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/CHiCAGO_data/rep3/ERR436031_1.trunc.fastq_bwam.sort.wasped.bam; ~mkircher/bin/samtools view -X /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/CHiCAGO_data/rep3/ERR436031_1.trunc.fastq_bwam.sort.wasped.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP1"$2; print }' ; ~mkircher/bin/samtools view -X /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/CHiCAGO_data/rep3/ERR436031_2.trunc.fastq_bwam.sort.wasped.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP2"$2; print }' ) | ~mkircher/bin/samtools view -Su - | samtools sort -n -@ 10 - -T /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/CHiCAGO_data/rep3/test_snps | samtools fixmate -r -p - /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/CHiCAGO_data/rep3/ERR436031_1.trunc.fastq_bwam.sort.wasped.bam
+
+
+
+( ~mkircher/bin/samtools view -H ERR436028_1.trunc.fastq_bwam.sort.wasped.bam; ~mkircher/bin/samtools view -X ERR436028_1.trunc.fastq_bwam.sort.wasped.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP1"$2; print }' ; ~mkircher/bin/samtools view -X ERR436028_2.trunc.fastq_bwam.sort.wasped.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP2"$2; print }' ) | ~mkircher/bin/samtools view -Su - | samtools sort -n -@ 10 - -T test_snps | samtools fixmate -r -p - ERR436028_1.trunc.fastq_bwam.sort.wasped.bam
+
+
 for i in {1..10}; do cd /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters/$i;  qsub -pe serial 6 -l mfree=2G /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/fixmate_pipeline_temp.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters/$i $i promoter.fixmate /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_v2/$i ; done
 
 qsub -pe serial 6 -l mfree=2G /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/fixmate_pipeline_temp.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters/$i $i promoter.fixmate /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_v2/$i
