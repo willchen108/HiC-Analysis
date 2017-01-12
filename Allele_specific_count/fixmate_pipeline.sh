@@ -1,7 +1,7 @@
 #Create by Will Chen @ 2016.06.16
 #for i in {1..10}
 #do 
-#sh ~/HiC-Analysis/Allele_specific_count/realigned_bam.sh $workdir/$i $i promoter.properPair /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will &
+#sh ~/HiC-Analysis/Allele_specific_count/realigned_bam.sh $workdir/$i $i promoter.fixmate /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhcpair_Will &
 #done
 
 NAME[1]=10847

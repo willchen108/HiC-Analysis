@@ -1,3 +1,13 @@
+qsub -l mfree=15G java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar MarkDuplicates \
+      VALIDATION_STRINGENCY=SILENT \
+      I=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/CHiCAGO_data/rep3/ERR436031.fixmate.bam \
+      REMOVE_DUPLICATES=true \
+      O=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/CHiCAGO_data/rep3/ERR436031.fixmate.dedup.bam \
+      M=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/CHiCAGO_data/rep3/ERR436031.fixmate.dedup.txt
+
+
+
+
 workdir=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters/8
 r1=$workdir/12872_S8_R1_001.fastq.bwam.bam
 r2=$workdir/12872_S8_R2_001.fastq.bwam.bam 

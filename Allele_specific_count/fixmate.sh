@@ -1,6 +1,6 @@
 #!/bin/sh
 #Create by Will Chen @ 2016.06.16
-#for i in {7..10}; do  qsub -l mfree=10G /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/fixmate_pipeline_temp.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters/$i $i promoter.fixmate /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_v2/$i & done
+#qsub -pe serial 10 -l mfree=5G /net/shendure/vol1/home/wchen108/HiC-Analysis/Allele_specific_count/fixmate.sh /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/promoter_capture_112515/Promoters/1 1 promoter.fixmate
 
 NAME[1]=10847
 NAME[2]=12814
