@@ -22,9 +22,9 @@ cat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq | echo $((`wc -l`/4)) >> $QCdir/$
 
 # Count for mapping
 echo -e ' \n' 'bwa f1 counts' >> $QCdir/${NAME[$i]}.snp.txt
-samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.bwam.sort.bam | grep '+ 0 mapped' >> $QCdir/${NAME[$i]}.snp.txt
+samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.bam | grep '+ 0 mapped' >> $QCdir/${NAME[$i]}.snp.txt
 echo -e ' \n' 'bwa f2 counts' >> $QCdir/${NAME[$i]}.snp.txt
-samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R2_001.bwam.sort.bam | grep '+ 0 mapped' >> $QCdir/${NAME[$i]}.snp.txt
+samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R2_001.fastq.bwam.bam | grep '+ 0 mapped' >> $QCdir/${NAME[$i]}.snp.txt
 
 # Count for WASP 
 echo -e ' \n' 'wasp f1 counts' >> $QCdir/${NAME[$i]}.snp.txt
@@ -34,15 +34,15 @@ samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.sort.wasp.bam 
 
 # Count for fixmate
 echo -e ' \n' 'fixmate counts(nowasp)' >> $QCdir/${NAME[$i]}.snp.txt
-samtools flagstat $workdir/$i/${filename}.snp.fixmate.sorted.bam | grep 'read1' >> $QCdir/${NAME[$i]}.snp.txt
+samtools flagstat $workdir/$i/${NAME[$i]}.snp.fixmate.sorted.bam | grep 'read1' >> $QCdir/${NAME[$i]}.snp.txt
 
-echo -e ' \n' 'fixmate counts(wasped)'
-samtools flagstat $destdir/$i/${filename}.snps.fixmate.bam | grep 'read1' >> $QCdir/${NAME[$i]}.snp.txt
+echo -e ' \n' 'fixmate counts(wasped)' >> $QCdir/${NAME[$i]}.pro.txt
+samtools flagstat $destdir/$i/$$NAME[$i]}.snps.fixmate.bam | grep 'read1' >> $QCdir/${NAME[$i]}.snp.txt
 
 # Count for deduplication/final pairs
 echo -e ' \n' 'dedup counts(nowasp)' >> $QCdir/${NAME[$i]}.snp.txt 
-samtools flagstat $workdir/$i/${filename}.snp.fixmate.sorted.dedup.bam | grep 'read1' >> $QCdir/${NAME[$i]}.snp.txt
+samtools flagstat $workdir/$i/${NAME[$i]}.snp.fixmate.sorted.dedup.bam | grep 'read1' >> $QCdir/${NAME[$i]}.snp.txt
 
 echo -e ' \n' 'dedup counts(wasped)' >> $QCdir/${NAME[$i]}.snp.txt 
-samtools flagstat $destdir/$i/${filename}.snps.fixmate.sorted.dedup.RG.bam | grep 'read1' >> $QCdir/${NAME[$i]}.snp.txt
+samtools flagstat $destdir/$i/${NAME[$i]}.snps.fixmate.sorted.dedup.RG.bam | grep 'read1' >> $QCdir/${NAME[$i]}.snp.txt
 
