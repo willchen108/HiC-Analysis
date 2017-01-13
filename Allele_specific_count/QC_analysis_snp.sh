@@ -36,7 +36,7 @@ samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.sort.wasp.bam 
 echo -e ' \n' 'fixmate counts(nowasp)' >> $QCdir/${NAME[$i]}.snp.txt
 samtools flagstat $workdir/$i/${NAME[$i]}.snp.fixmate.sorted.bam | grep 'read1' >> $QCdir/${NAME[$i]}.snp.txt
 
-echo -e ' \n' 'fixmate counts(wasped)' >> $QCdir/${NAME[$i]}.pro.txt
+echo -e ' \n' 'fixmate counts(wasped)' >> $QCdir/${NAME[$i]}.snp.txt
 samtools flagstat $destdir/$i/$$NAME[$i]}.snps.fixmate.bam | grep 'read1' >> $QCdir/${NAME[$i]}.snp.txt
 
 # Count for deduplication/final pairs
