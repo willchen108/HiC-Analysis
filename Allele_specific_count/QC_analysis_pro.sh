@@ -34,14 +34,14 @@ samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.sort.wasped.ba
 
 # Count for fixmate
 echo -e ' \n' 'fixmate counts(nowasp)' >> $QCdir/${NAME[$i]}.pro.txt
-samtools flagstat $workdir/$i/${NAME[$i]}.promoter.fixmate.sort.bam | grep 'read1' >> $QCdir/${NAME[$i]}.pro.txt
+samtools flagstat $workdir/$i/${NAME[$i]}.promoter.fixmate.sorted.bam | grep 'read1' >> $QCdir/${NAME[$i]}.pro.txt
 
 echo -e ' \n' 'fixmate counts(wasped)' >> $QCdir/${NAME[$i]}.pro.txt
 samtools flagstat $destdir/$i/${NAME[$i]}.promoter.fixmate.bam | grep 'read1' >> $QCdir/${NAME[$i]}.pro.txt
 
 # Count for deduplication/final pairs
 echo -e ' \n' 'dedup counts(nowasp)' >> $QCdir/${NAME[$i]}.pro.txt 
-samtools flagstat $workdir/$i/${NAME[$i]}.promoter.fixmate.sort.dedup.bam | grep 'read1' >> $QCdir/${NAME[$i]}.pro.txt
+samtools flagstat $workdir/$i/${NAME[$i]}.promoter.fixmate.sorted.dedup.bam | grep 'read1' >> $QCdir/${NAME[$i]}.pro.txt
 
 echo -e ' \n' 'dedup counts(wasped)' >> $QCdir/${NAME[$i]}.pro.txt 
 samtools flagstat $destdir/$i/${NAME[$i]}.promoter.fixmate.sorted.dedup.RG.bam | grep 'read1' >> $QCdir/${NAME[$i]}.pro.txt

@@ -32,3 +32,5 @@ java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar M
       O=$workdir/${NAME[$i]}.${suffix}.sorted.dedup.bam \
       ASSUME_SORTED=true \
       M=$workdir/${NAME[$i]}.${suffix}.sorted.dedup.txt
+
+rm $workdir/${NAME[$i]}.${suffix}.bam
