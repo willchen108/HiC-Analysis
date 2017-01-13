@@ -20,3 +20,15 @@ suffix=$3
 r1=$workdir/${NAME[$i]}_S${i}_R1_001.fastq
 r2=$workdir/${NAME[$i]}_S${i}_R2_001.fastq
 ( ~mkircher/bin/samtools view -H $r1.bwam.sort.bam; ~mkircher/bin/samtools view -X $r1.bwam.sort.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP1"$2; print }' ; ~mkircher/bin/samtools view -X $r2.bwam.sort.bam | awk 'BEGIN{ FS="\t"; OFS="\t";}{ $2="pP2"$2; print }' ) | ~mkircher/bin/samtools view -Su - | samtools sort -n -@ 10 - -T $workdir/${NAME[$i]}_test_snps | samtools fixmate -r -p - $workdir/${NAME[$i]}.${suffix}.bam
+
+# sort
+samtools sort -@ 10 -o $workdir/${NAME[$i]}.${suffix}.sorted.bam $workdir/${NAME[$i]}.${suffix}.bam
+
+# Deduplicate 
+java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar MarkDuplicates \
+      VALIDATION_STRINGENCY=SILENT \
+      I=$workdir/${NAME[$i]}.${suffix}.sorted.bam \
+      REMOVE_DUPLICATES=true \
+      O=$workdir/${NAME[$i]}.${suffix}.sorted.dedup.bam \
+      ASSUME_SORTED=true \
+      M=$workdir/${NAME[$i]}.${suffix}.sorted.dedup.txt
