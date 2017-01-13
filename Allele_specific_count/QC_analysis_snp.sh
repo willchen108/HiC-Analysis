@@ -12,8 +12,8 @@ NAME[8]=12872
 NAME[9]=12873
 NAME[10]=12874
 
-i=$2
-workdir=$1
+i=$1
+workdir=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters
 destdir=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_v2
 # Count for fastq file
 echo 'fastq counts' > $workdir/${NAME[$i]}.txt
@@ -22,21 +22,21 @@ cat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq | echo $((`wc -l`/4)) >> $workdir
 
 # Count for mapping
 echo 'bwa f1 counts' >> $workdir/${NAME[$i]}.txt
-samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.bam | grep 'mapped' | echo >> $workdir/${NAME[$i]}.txt
+samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.bam | grep 'mapped' >> $workdir/${NAME[$i]}.txt
 echo 'bwa f2 counts' >> $workdir/${NAME[$i]}.txt
-samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R2_001.fastq.bwam.bam | grep 'mapped' | echo >> $workdir/${NAME[$i]}.txt
+samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R2_001.fastq.bwam.bam | grep 'mapped' >> $workdir/${NAME[$i]}.txt
 
 # Count for WASP 
 echo 'wasp f1 counts' >> $workdir/${NAME[$i]}.txt
-samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.was*.bam | grep 'mapped' | echo >> $workdir/${NAME[$i]}.txt
+samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.was*.bam | grep 'mapped' >> $workdir/${NAME[$i]}.txt
 echo 'wasp f2 counts' >> $workdir/${NAME[$i]}.txt
-samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.was*.bam | grep 'mapped' | echo >> $workdir/${NAME[$i]}.txt
+samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.was*.bam | grep 'mapped' >> $workdir/${NAME[$i]}.txt
 
 # Count for fixmate
 echo 'fixmate counts(nowasp)' >> $workdir/${NAME[$i]}.txt
-samtools flagstat $workdir/${filename}.fixmate.sort.bam | grep 'read1' | echo >> $workdir/${NAME[$i]}.txt
+samtools flagstat $workdir/${filename}.fixmate.sort.bam | grep 'read1' >> $workdir/${NAME[$i]}.txt
 
 echo 'fixmate counts(wasped)'
 # Count for deduplication/final pairs
 echo 'dedup counts' >> $workdir/${NAME[$i]}.txt 
-samtools flagstat $workdir/${filename}.fixmate.sort.dedup.bam | grep 'read1' | echo >> $workdir/${NAME[$i]}.txt
+samtools flagstat $workdir/${filename}.fixmate.sort.dedup.bam | grep 'read1' >> $workdir/${NAME[$i]}.txt
