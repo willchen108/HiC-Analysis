@@ -7,7 +7,7 @@ filename=$2
 
 cd $workdir
 # Count for fastq file
-cat $workdir/${filename}_1.trunc.fastq.fastq | echo -e $((`wc -l`/4)) ' \t' 'fastq counts'> $workdir/$filename.txt
+cat $workdir/${filename}_1.trunc.fastq | echo -e $((`wc -l`/4)) ' \t' 'fastq counts'> $workdir/$filename.txt
 
 # Count for mapping
 samtools flagstat $workdir/${filename}_1.trunc.fastq_bwam.sort.bam | grep 'mapped' | echo >> $workdir/$filename.txt
