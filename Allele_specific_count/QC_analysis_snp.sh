@@ -15,28 +15,34 @@ NAME[10]=12874
 i=$1
 workdir=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters
 destdir=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/dhc_v2
+QCdir=/net/shendure/vol10/projects/DNaseHiC.eQTLs/data/QCstat
 # Count for fastq file
-echo 'fastq counts' > $workdir/${NAME[$i]}.txt
-
-cat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq | echo $((`wc -l`/4)) >> $workdir/${NAME[$i]}.txt
+echo 'fastq counts' > $QCdir/${NAME[$i]}.snp.txt
+cat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq | echo $((`wc -l`/4)) >> $QCdir/${NAME[$i]}.snp.txt
 
 # Count for mapping
-echo 'bwa f1 counts' >> $workdir/${NAME[$i]}.txt
-samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.bam | grep 'mapped' >> $workdir/${NAME[$i]}.txt
-echo 'bwa f2 counts' >> $workdir/${NAME[$i]}.txt
-samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R2_001.fastq.bwam.bam | grep 'mapped' >> $workdir/${NAME[$i]}.txt
+echo -e ' \n' 'bwa f1 counts' >> $QCdir/${NAME[$i]}.snp.txt
+samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.bwam.sort.bam | grep '+ 0 mapped' >> $QCdir/${NAME[$i]}.snp.txt
+echo -e ' \n' 'bwa f2 counts' >> $QCdir/${NAME[$i]}.snp.txt
+samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R2_001.bwam.sort.bam | grep '+ 0 mapped' >> $QCdir/${NAME[$i]}.snp.txt
 
 # Count for WASP 
-echo 'wasp f1 counts' >> $workdir/${NAME[$i]}.txt
-samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.was*.bam | grep 'mapped' >> $workdir/${NAME[$i]}.txt
-echo 'wasp f2 counts' >> $workdir/${NAME[$i]}.txt
-samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.was*.bam | grep 'mapped' >> $workdir/${NAME[$i]}.txt
+echo -e ' \n' 'wasp f1 counts' >> $QCdir/${NAME[$i]}.snp.txt
+samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.sort.wasp.bam | grep '+ 0 mapped' >> $QCdir/${NAME[$i]}.snp.txt
+echo -e ' \n' 'wasp f2 counts' >> $QCdir/${NAME[$i]}.snp.txt
+samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.sort.wasp.bam | grep '+ 0 mapped' >> $QCdir/${NAME[$i]}.snp.txt
 
 # Count for fixmate
-echo 'fixmate counts(nowasp)' >> $workdir/${NAME[$i]}.txt
-samtools flagstat $workdir/${filename}.fixmate.sort.bam | grep 'read1' >> $workdir/${NAME[$i]}.txt
+echo -e ' \n' 'fixmate counts(nowasp)' >> $QCdir/${NAME[$i]}.snp.txt
+samtools flagstat $workdir/$i/${filename}.snp.fixmate.sorted.bam | grep 'read1' >> $QCdir/${NAME[$i]}.snp.txt
 
-echo 'fixmate counts(wasped)'
+echo -e ' \n' 'fixmate counts(wasped)'
+samtools flagstat $destdir/$i/${filename}.snps.fixmate.bam | grep 'read1' >> $QCdir/${NAME[$i]}.snp.txt
+
 # Count for deduplication/final pairs
-echo 'dedup counts' >> $workdir/${NAME[$i]}.txt 
-samtools flagstat $workdir/${filename}.fixmate.sort.dedup.bam | grep 'read1' >> $workdir/${NAME[$i]}.txt
+echo -e ' \n' 'dedup counts(nowasp)' >> $QCdir/${NAME[$i]}.snp.txt 
+samtools flagstat $workdir/$i/${filename}.snp.fixmate.sorted.dedup.bam | grep 'read1' >> $QCdir/${NAME[$i]}.snp.txt
+
+echo -e ' \n' 'dedup counts(wasped)' >> $QCdir/${NAME[$i]}.snp.txt 
+samtools flagstat $destdir/$i/${filename}.snps.fixmate.sorted.dedup.RG.bam | grep 'read1' >> $QCdir/${NAME[$i]}.snp.txt
+
