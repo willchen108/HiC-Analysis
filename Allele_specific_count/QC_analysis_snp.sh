@@ -30,7 +30,7 @@ samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R2_001.fastq.bwam.bam | grep '+ 
 echo -e ' \n' 'wasp f1 counts' >> $QCdir/${NAME[$i]}.snp.txt
 samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.sort.wasp.bam | grep '+ 0 mapped' >> $QCdir/${NAME[$i]}.snp.txt
 echo -e ' \n' 'wasp f2 counts' >> $QCdir/${NAME[$i]}.snp.txt
-samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R1_001.fastq.bwam.sort.wasp.bam | grep '+ 0 mapped' >> $QCdir/${NAME[$i]}.snp.txt
+samtools flagstat $workdir/$i/${NAME[$i]}_S${i}_R2_001.fastq.bwam.sort.wasp.bam | grep '+ 0 mapped' >> $QCdir/${NAME[$i]}.snp.txt
 
 # Count for fixmate
 echo -e ' \n' 'fixmate counts(nowasp)' >> $QCdir/${NAME[$i]}.snp.txt

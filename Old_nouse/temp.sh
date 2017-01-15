@@ -5,7 +5,8 @@ qsub -l mfree=15G java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-
       O=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/CHiCAGO_data/rep3/ERR436031.fixmate.dedup.bam \
       M=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/CHiCAGO_data/rep3/ERR436031.fixmate.dedup.txt
 
-
+qsub -l mfree=20G bwa mem -M /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs37d5/hs37d5.fa /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/CHiCAGO_data/rep2_2/ERR436030_1.trunc.fastq | samtools view -bS - > ERR436030_1.trunc.fastq_bwam.bam
+qsub -l mfree=20G bwa mem -M /net/shendure/vol10/nobackup/shared/alignments/bwa-0.6.1/human_g1k_hs37d5/hs37d5.fa /net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/CHiCAGO_data/rep2_2/ERR436030_2.trunc.fastq | samtools view -bS - > ERR436030_2.trunc.fastq_bwam.bam
 
 
 workdir=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters/8
