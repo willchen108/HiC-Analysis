@@ -1,3 +1,32 @@
+NAME[1]=10847
+NAME[2]=12814
+NAME[3]=12878
+NAME[4]=12815
+NAME[5]=12812
+NAME[6]=12813
+NAME[7]=12875
+NAME[8]=12872
+NAME[9]=12873
+NAME[10]=12874
+
+workdir=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/eQTL_SNPs_151228/Promoters
+suffix=snp.fixmate
+
+# Deduplicate 
+java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar MarkDuplicates \
+      VALIDATION_STRINGENCY=SILENT \
+      I=$workdir/$i/${NAME[$i]}.${suffix}.sorted.bam \
+      REMOVE_DUPLICATES=true \
+      O=$workdir/$i/${NAME[$i]}.${suffix}.sorted.dedup.bam \
+      ASSUME_SORTED=true \
+      M=$workdir/$i/${NAME[$i]}.${suffix}.sorted.dedup.txt
+
+rm $workdir/$i/${NAME[$i]}.${suffix}.bam
+
+
+
+
+
 qsub -l mfree=15G java -jar /net/shendure/vol1/home/wchen108/tools/picard-tools-1.141/picard.jar MarkDuplicates \
       VALIDATION_STRINGENCY=SILENT \
       I=/net/shendure/vol10/projects/DNaseHiC.eQTLs/nobackup/CHiCAGO_data/rep3/ERR436031.fixmate.bam \
